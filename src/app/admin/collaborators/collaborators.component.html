@@ -1,0 +1,105 @@
+
+<div class="tiles">
+
+    <span style="color: #546e7a; font-size: 11px;">ADMINISTRACION</span>
+    
+    <h2 style="margin-top: 10px;">Colaboradores</h2>
+    
+</div>
+
+<div style="float: right; margin-top: 13px;">
+    <button type="button" (click)="agregarColaborador()" mat-raised-button color="primary">AGREGAR COLABORADOR</button>
+</div>
+
+<div>
+    <div style="background-color: white; width: auto; display: inline-block;">
+        <mat-form-field appearance="outline" style="margin: 0px; padding: 0px;"> 
+            <mat-label>Búsqueda</mat-label>
+            <input matInput (keyup)="applyFilterCol($event)" placeholder="Busqueda" style="background-color: white;">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        
+    </div>
+    <div style="display: inline-block;">
+        <button mat-raised-button style="margin-left: 15px;" type="button">BUSCAR</button>
+
+    </div>
+</div>
+    
+<br>
+
+<mat-card class="mat-elevation-z0" style="border: 1px #e4e4e4 solid;">
+    Todos los Colaboradores
+
+    <button type="button" mat-button [matMenuTriggerFor]="menuAccount"  style="float: right; cursor: pointer; margin-top: -10px; padding: 0px; min-width: min-content;">
+        <mat-icon class="mat-icon" aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon>
+    </button>
+    <mat-menu #menuAccount="matMenu">
+        <button type="button" mat-menu-item> <mat-icon>picture_as_pdf</mat-icon> Exportar PDF</button>
+        <button type="button" mat-menu-item> <mat-icon>description</mat-icon> Exportar Excel</button>
+        <button type="button" mat-menu-item> <mat-icon>print</mat-icon> Imprimir</button>
+    </mat-menu>
+</mat-card>
+    
+<table mat-table [dataSource]="dataSourceCol" matSort class="mat-elevation-z1">
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+        <!-- <td mat-cell *matCellDef="let row"> {{row.progress}}% </td> -->
+        <td mat-cell *matCellDef="let row"> 
+        
+        <h4 mat-line>{{row.dni}}</h4>
+        
+        </td>
+    </ng-container>
+    
+    <!-- ID Column -->
+    <ng-container matColumnDef="nombres">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+        <!-- <td mat-cell *matCellDef="let row"> {{row.id}} </td> -->
+        <td mat-cell *matCellDef="let row"> 
+        {{row.name}}
+        </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="apellidos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+        <td mat-cell *matCellDef="let row"> {{row.apaterno}} {{row.amaterno}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="procedencia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Procedencia Autodiagnostico </th>
+        <td mat-cell *matCellDef="let row"> {{row.origin}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="control">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Control </th>
+        <td mat-cell *matCellDef="let row"> {{row.control}} </td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10px;"> Accion </th>
+        <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
+            <div style="display: flex;">
+                <button (click)="editarColaborador(row)" mat-mini-fab color="primary" matTooltip="Editar">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                &nbsp;
+                <button (click)="verSeguimientos(row)" mat-mini-fab color="primary" matTooltip="Seguimientos">
+                    <mat-icon>view_list</mat-icon>
+                </button>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsCol"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsCol;"></tr>
+    
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6">No se encontraron registros</td>
+    </tr>
+</table>
+    
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1"></mat-paginator>

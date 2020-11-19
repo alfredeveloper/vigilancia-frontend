@@ -1,0 +1,112 @@
+<h1 mat-dialog-title>Nuevo Seguimiento</h1>
+
+<form #f="ngForm" ngNativeValidate (ngSubmit)="registrarSeguimiento(f)">
+
+    <div>
+        <div class="row">
+            <div class="col s4">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Temperatura</mat-label>
+                    <input matInput placeholder="Temperatura" type="number" [(ngModel)]="follow.temperature" name="temperature">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Prueba Diag. Serológica</mat-label>
+                    <mat-select [(ngModel)]="follow.serological_diagnostic_test" name="serological_diagnostic_test">
+                        <mat-option value="PRUEBA 1">
+                            Prueba 1
+                        </mat-option>
+                        <mat-option value="PRUEBA 2">
+                            Prueba 2
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Seguimiento del caso</mat-label>
+                    <mat-select [(ngModel)]="follow.case_follow_up" name="case_follow_up">
+                        <mat-option value="SOSPECHOSO">
+                            Sospechoso
+                        </mat-option>
+                        <mat-option value="CONFIRMADO">
+                            Confirmado
+                        </mat-option>
+                        <mat-option value="DESCARTADO">
+                            Descartado
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.chills_sweating" name="chills_sweating">Escalofrios / Sudoración</mat-checkbox>
+                </p>
+                
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.cough" name="cough">Tos</mat-checkbox>
+                </p>
+                
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.sore_throat" name="sore_throat">Dolor de garganta</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.chest_pain" name="chest_pain">Dolor de pecho</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.anosmia" name="anosmia">Anosmia</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.dysgeusia" name="dysgeusia">Disgeusia</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.nasal_congestion" name="nasal_congestion">Congestion Nasal</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.general_discomfort" name="general_discomfort">Malestar General</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.difficulty_breathing" name="difficulty_breathing">Dificultad para respirar</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.diarrhea" name="diarrhea">Diarrea</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.vomits" name="vomits">Nauseas / Vómitos</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.headache" name="headache">Cefalea</mat-checkbox>
+                </p>
+            </div>
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.disorientation" name="disorientation">Desorientación</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.cyanosis" name="cyanosis">Cianosis</mat-checkbox>
+                </p>
+                
+                <h3 mat-dialog-title>Evolución</h3>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.recovered" name="recovered">Recuperado</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.transfer_to_hospital" name="transfer_to_hospital">Traslado a hospital</mat-checkbox>
+                </p>
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.passed_away" name="passed_away">Fallecido</mat-checkbox>
+                </p>
+            </div>
+            
+        </div>
+    
+    </div>
+    
+    <div mat-dialog-actions class="bottom-sheet">
+        <button mat-button (click)="cancelar()">Cancelar</button>
+        <button mat-stroked-button cdkFocusInitial type="submit" color="primary">Registrar</button>
+    </div>
+
+</form>
+

@@ -1,0 +1,13 @@
+h2 {
+    color: #1b1e4c;
+}
+
+.btn-yes {
+    background-color: #1b1e4c;
+    color: white;
+}
+
+.btn-no {
+    border: 1px solid #1b1e4c;
+    color: #1b1e4c;
+}

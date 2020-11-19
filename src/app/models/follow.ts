@@ -1,0 +1,25 @@
+export class Follow {
+    constructor(
+        public temperature:                    Number,
+        public chills_sweating:                Boolean,
+        public cough:                          Boolean,
+        public sore_throat:                    Boolean,
+        public chest_pain:                     Boolean,
+        public anosmia:                        Boolean,
+        public dysgeusia:                      Boolean,
+        public nasal_congestion:               Boolean,
+        public general_discomfort:             Boolean,
+        public difficulty_breathing:           Boolean,
+        public diarrhea:                       Boolean,
+        public vomits:                         Boolean,
+        public headache:                       Boolean,
+        public disorientation:                 Boolean,
+        public cyanosis:                       Boolean,
+        public serological_diagnostic_test:    String,
+        public case_follow_up:                 String,
+        public recovered:                      Boolean,
+        public transfer_to_hospital:           Boolean,
+        public passed_away:                    Boolean,
+        public patient:                        any,
+    ){}
+}

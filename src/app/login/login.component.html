@@ -1,0 +1,55 @@
+
+
+<div style="width: 40%; float: left; height: 100vh;">
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #eee;">
+                <img src="https://w7.pngwing.com/pngs/306/115/png-transparent-physician-dentistry-clinic-medicine-health-blue-hand-logo.png" alt="" width="400px">
+            </div>
+            <div class="swiper-slide" style="background-color: #eee;">
+                <img src="https://e7.pngegg.com/pngimages/600/751/png-clipart-logo-physician-medical-prescription-clinic-hospital-others-miscellaneous-text.png" alt="" width="300px">
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+</div>
+<div style="width: 60%; float: right; height: 100vh; display: flex;
+justify-content: center;
+align-items: center;">
+    <form #f="ngForm" ngNativeValidate (ngSubmit)="ingresar(f)">
+        <mat-card style="padding: 50px;" class="mat-elevation-z4">
+            
+            <h2>INICIAR SESION</h2>
+            
+            <p>Vigilancia de Salud</p>
+
+            <p style="margin-bottom: 0px;">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Usuario</mat-label>
+                    <input type="email" matInput placeholder="Usuario" [(ngModel)]="user.email" name="email" required>
+                </mat-form-field>
+            </p>
+    
+            <p style="margin-top: 0px; margin-bottom: 0px;">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" type="password" matInput placeholder="Contraseña" [(ngModel)]="user.password" name="password" required>
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </p>
+    
+            <p>
+                <button mat-raised-button color="primary" type="submit" style="width: 100%;" class="mat-elevation-z4">{{messageButton}}</button>
+            </p>
+        </mat-card>
+    </form>
+
+
+</div>
+
+

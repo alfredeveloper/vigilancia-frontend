@@ -1,0 +1,76 @@
+
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)">
+      <mat-toolbar class="logo mat-elevation-z4 header">
+        <div style="text-align: center; width: 100%;">
+          <img src="data:image/png;base64,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" alt="" width="70px">        
+        </div>
+      </mat-toolbar>
+      <mat-nav-list style="padding-top: 25px;">
+        <p style="color: #546e7a; padding-left: 30px; margin-bottom: 15px;">Páginas</p>
+        
+        <div *ngFor="let page of pages">
+          <a *ngIf="page.submenus.length == 0 && page.enabled" mat-list-item [routerLinkActive]="['active']" [routerLink]="[page.url]">
+            <mat-icon mat-list-icon class="mat-icons" aria-hidden="false" aria-label="Example home icon">{{page.icono}}</mat-icon>
+            <span>{{page.titulo}}</span>
+          </a>
+
+          <div *ngIf="page.submenus.length > 0 && page.enabled">
+            <mat-list-item (click)="page.showSubmenu = !page.showSubmenu" class="parent">
+              <span class="full-width" *ngIf="page.isExpanded || page.isShowing">{{page.titulo}}</span>
+              <mat-icon mat-list-icon class="mat-icons">{{page.icono}}</mat-icon>
+              <span class="example-spacer"></span>
+              <mat-icon class="menu-button" [ngClass]="{'rotated' : page.showSubmenu}" *ngIf="page.isExpanded || page.isShowing">expand_more</mat-icon>
+            </mat-list-item>
+  
+            <div class="submenu" [ngClass]="{'expanded' : page.showSubmenu}" *ngIf="page.isShowing || page.isExpanded">
+              <div *ngFor="let subpage of page.submenus">
+                <a *ngIf="subpage.enabled" class="subitem" mat-list-item [routerLinkActive]="['active']" [routerLink]="[subpage.url]" >{{subpage.titulo}}</a>
+              </div>
+              
+            </div>
+
+          </div>
+        </div>
+        
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary" class="mat-elevation-z4 header">
+        
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        
+        <button mat-icon-button [matMenuTriggerFor]="notification" aria-label="Example icon-button with a menu">
+          <mat-icon class="white-icon" matBadge="1" matBadgeColor="warn">notifications</mat-icon>
+        </button>
+        <mat-menu #notification="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <mat-icon>notifications</mat-icon>
+            <span>Nueva notificación</span>
+          </button>
+          
+        </mat-menu>
+        <mat-icon class="white-icon" style="margin-left: 15px;">power_settings_new</mat-icon>
+        <span class="white-icon" style="font-size: 14px; font-weight: 400; cursor: pointer;" (click)="cerrarSesion()">CERRAR SESION</span>
+        <mat-menu #menuAccount="matMenu">
+          <button mat-menu-item>Elvin Flores</button>
+          <button mat-menu-item (click)="cerrarSesion()">Cerrar Sesión</button>
+        </mat-menu>
+      </mat-toolbar>
+      <div class="app-content">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- Add Content Here -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>

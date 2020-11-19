@@ -1,0 +1,278 @@
+<h1 mat-dialog-title>Registrar Colaborador</h1>
+
+<form #f="ngForm" ngNativeValidate (ngSubmit)="registrarColaborador(f)">
+
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>DNI</mat-label>
+                    <input type="number" matInput placeholder="DNI" [(ngModel)]="patient.dni" required name="email">
+                </mat-form-field>
+            </div>
+    
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Nombres</mat-label>
+                    <input type="text" matInput placeholder="Nombres" [(ngModel)]="patient.name" required name="name">
+                </mat-form-field>
+            </div>
+    
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input type="text" matInput placeholder="Apellido Paterno" [(ngModel)]="patient.apaterno" required name="apaterno">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Apellido Materno</mat-label>
+                    <input type="text" matInput placeholder="Apellido Materno" [(ngModel)]="patient.amaterno" required name="amaterno">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Puesto de Trabajo</mat-label>
+                    <input type="text" matInput placeholder="Puesto de Trabajo" [(ngModel)]="patient.job" required name="job">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Teléfono</mat-label>
+                    <input type="tel" matInput placeholder="Teléfono" [(ngModel)]="patient.telephone" required name="telephone">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="patient.birth_date" required name="birth_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Distrito</mat-label>
+                    <input type="text" matInput placeholder="Distrito" [(ngModel)]="patient.district" required name="district">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Empresa/Otra/Contratista</mat-label>
+                    <input type="text" matInput placeholder="Empresa/Otra/Contratista" [(ngModel)]="patient.company" required name="company">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput [matDatepicker]="picker1" placeholder="Fecha de inicio" [(ngModel)]="patient.start_date" required name="start_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+    
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Procedencia autodiagnóstico</mat-label>
+                    <mat-select [(ngModel)]="patient.origin" name="origin" required>
+                        <mat-option value="CON SINTOMA">
+                            Con síntoma
+                        </mat-option>
+                        <mat-option value="CON SOSPECHA">
+                            Con sospecha
+                        </mat-option>
+                        <mat-option value="CON RIESGO">
+                            Con riesgo
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <label id="example-radio-group-label" >Control</label>
+                <br>
+                <mat-radio-group aria-label="SELECCIONE UNA OPCIÓN" [(ngModel)]="patient.control" name="control">
+                    <mat-radio-button color="primary" value="SI" selected>SI</mat-radio-button>
+                    &nbsp;&nbsp;&nbsp;
+                    <mat-radio-button color="primary" value="NO">NO</mat-radio-button>
+                </mat-radio-group>
+
+                <!-- <mat-form-field>
+                    <mat-label>Control</mat-label>
+                    <input type="text" matInput placeholder="Control" [(ngModel)]="patient.control" required name="control">
+                </mat-form-field> -->
+            </div>
+
+            <div class="col s9" style="padding-bottom: 20px;">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Seguimiento Clínico
+                            </mat-panel-title>
+                            
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                            <div class="col s4">
+                                <p>
+                                    <mat-form-field>
+                                        <mat-label>Temperatura</mat-label>
+                                        <input type="number" matInput placeholder="Temperatura" [(ngModel)]="follow.temperature" required name="temperature">
+                                    </mat-form-field>
+                                </p>
+
+                                <p>
+                                    <mat-form-field>
+                                        <mat-label>Prueba Diag. Serológica</mat-label>
+                                        <mat-select [(ngModel)]="follow.serological_diagnostic_test" name="serological_diagnostic_test" required>
+                                            <mat-option value="PRUEBA 1">
+                                                Prueba 1
+                                            </mat-option>
+                                            <mat-option value="PRUEBA 2">
+                                                Prueba 2
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </p>
+        
+                                <p>
+                                    <mat-form-field>
+                                        <mat-label>Seguimiento del caso</mat-label>
+                                        <mat-select [(ngModel)]="follow.case_follow_up" name="case_follow_up" required>
+                                            <mat-option value="SOSPECHOSO">
+                                                Sospechoso
+                                            </mat-option>
+                                            <mat-option value="CONFIRMADO">
+                                                Confirmado
+                                            </mat-option>
+                                            <mat-option value="DESCARTADO">
+                                                Descartado
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </p>
+        
+                                
+                            </div>
+                            <div class="col s4">
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.chills_sweating" name="chills_sweating">Escalofríos/Sudoración</mat-checkbox>
+                                </p>
+        
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.cough" name="cough">Tos</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.sore_throat" name="sore_throat">Dolor de garganta</mat-checkbox>
+                                </p>
+        
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.chest_pain" name="chest_pain">Dolor de pecho</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.anosmia" name="anosmia">Anosmia</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.dysgeusia" name="dysgeusia">Disgeusia</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.nasal_congestion" name="nasal_congestion">Congestión nasal</mat-checkbox>
+                                </p>
+                                
+                            </div>
+                            
+                            <div class="col s4">
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.general_discomfort" name="general_discomfort">Malestar general</mat-checkbox>
+                                </p>
+
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.difficulty_breathing" name="difficulty_breathing">Dificultad para respirar</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.diarrhea" name="diarrhea">Diarrea</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.vomits" name="vomits">Nauseas / Vomitos</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.headache" name="headache">Cefalea</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.disorientation" name="disorientation">Desorientación</mat-checkbox>
+                                </p>
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.cyanosis" name="cyanosis">Cianosis</mat-checkbox>
+                                </p>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        
+                    </mat-expansion-panel>
+                    
+                </mat-accordion>
+            </div>
+
+            <div class="col s3" style="padding-bottom: 20px;">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Evolución
+                            </mat-panel-title>
+                            
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                            
+                            
+                            <div class="col s12">
+                                
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.recovered" name="recovered">Recuperado</mat-checkbox>
+                                </p>
+        
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.transfer_to_hospital" name="transfer_to_hospital">Traslado a hospital</mat-checkbox>
+                                </p>
+        
+                                <p>
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.passed_away" name="passed_away">Fallecido</mat-checkbox>
+                                </p>
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </mat-expansion-panel>
+                    
+                </mat-accordion>
+            </div>
+
+        </div>
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancelar()" type="button">Cancelar</button>
+        <button mat-stroked-button cdkFocusInitial type="submit" color="primary">Registrar</button>
+    </div>
+
+</form>

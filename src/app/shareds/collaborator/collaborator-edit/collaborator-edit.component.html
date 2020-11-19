@@ -1,0 +1,120 @@
+<h1 mat-dialog-title>Editar Colaborador</h1>
+
+<form #f="ngForm" ngNativeValidate (ngSubmit)="actualizarColaborador(f)">
+
+    <div mat-dialog-content>
+        <div class="row">
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>DNI</mat-label>
+                    <input type="number" matInput placeholder="DNI" [(ngModel)]="data.dni" required name="email">
+                </mat-form-field>
+            </div>
+    
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Nombres</mat-label>
+                    <input type="text" matInput placeholder="Nombres" [(ngModel)]="data.name" required name="name">
+                </mat-form-field>
+            </div>
+    
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input type="text" matInput placeholder="Apellido Paterno" [(ngModel)]="data.apaterno" required name="apaterno">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Apellido Materno</mat-label>
+                    <input type="text" matInput placeholder="Apellido Materno" [(ngModel)]="data.amaterno" required name="amaterno">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Puesto de Trabajo</mat-label>
+                    <input type="text" matInput placeholder="Puesto de Trabajo" [(ngModel)]="data.job" required name="job">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Teléfono</mat-label>
+                    <input type="tel" matInput placeholder="Teléfono" [(ngModel)]="data.telephone" required name="telephone">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="data.birth_date" required name="birth_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Distrito</mat-label>
+                    <input type="text" matInput placeholder="Distrito" [(ngModel)]="data.district" required name="district">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Empresa/Otra/Contratista</mat-label>
+                    <input type="text" matInput placeholder="Empresa/Otra/Contratista" [(ngModel)]="data.company" required name="job">
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput [matDatepicker]="picker1" placeholder="Fecha de inicio" [(ngModel)]="data.start_date" required name="start_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+    
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Procedencia autodiagnóstico</mat-label>
+                    <mat-select [(ngModel)]="data.origin" name="origin" required>
+                        <mat-option value="CON SINTOMA">
+                            Con síntoma
+                        </mat-option>
+                        <mat-option value="CON SOSPECHA">
+                            Con sospecha
+                        </mat-option>
+                        <mat-option value="CON RIESGO">
+                            Con riesgo
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <label id="example-radio-group-label" >Control</label>
+                <br>
+                <mat-radio-group aria-label="SELECCIONE UNA OPCIÓN" [(ngModel)]="data.control" name="control">
+                    <mat-radio-button color="primary" value="SI" selected>SI</mat-radio-button>
+                    &nbsp;&nbsp;&nbsp;
+                    <mat-radio-button color="primary" value="NO">NO</mat-radio-button>
+                </mat-radio-group>
+                <!-- <mat-form-field>
+                    <mat-label>Control</mat-label>
+                    <input type="text" matInput placeholder="Control" [(ngModel)]="data.control" required name="control">
+                </mat-form-field> -->
+            </div>
+
+        </div>
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancelar()" type="button">Cancelar</button>
+        <button mat-stroked-button cdkFocusInitial type="submit" color="primary">Guardar</button>
+    </div>
+
+</form>

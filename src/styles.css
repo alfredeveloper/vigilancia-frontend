@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-add {
+    color: #fff !important;
+    background-color: #439551 !important;
+}
+
+.mat-add[disabled] {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-filter {
+    color: #09c !important;
+    border: 1px solid #09c !important; 
+    background-color: #fff !important;
+}
+
+.mat-filter[disabled] {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-pending {
+    color: #fff !important;
+    background-color: #ffa727 !important;
+}
+
+.mat-pending[disabled] {
+    background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.width-bottom-sheet {
+    width: 750px;
+}

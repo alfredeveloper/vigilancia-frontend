@@ -1,0 +1,54 @@
+<mat-toolbar color="warn" class="crm-navigation-bar">
+
+    <mat-toolbar-row>
+  
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+  
+      <span class="toolbar-title"> {{ 'APP_TOOLBAR_TITLE' }} </span>
+  
+      <div fxFlex fxLayout fxLayoutAlign="flex-end">
+  
+        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+  
+          <li fxHide.xs>
+            <button mat-icon-button>
+              <mat-icon>settings</mat-icon>
+            </button>
+          </li>
+  
+          <li fxHide.xs>
+            <button mat-icon-button>
+              <mat-icon>help_outline</mat-icon>
+            </button>
+          </li>
+  
+          <li>
+            <button mat-icon-button [matMenuTriggerFor]="auth">
+              <mat-icon>person_outline</mat-icon>
+            </button>
+            <mat-menu #auth="matMenu">
+  
+              <button mat-menu-item >
+                <mat-icon>person_outline</mat-icon>
+                <span>Profile</span>
+              </button>
+  
+              <mat-divider></mat-divider>
+  
+              <button mat-menu-item >
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Sign out</span>
+              </button>
+  
+            </mat-menu>
+          </li>
+  
+        </ul>
+  
+      </div>
+  
+    </mat-toolbar-row>
+  
+</mat-toolbar>
