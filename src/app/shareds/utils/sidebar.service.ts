@@ -27,6 +27,20 @@ export class SidebarService {
             submenus: [],
             enabled: true,
         },
+        {
+            titulo: 'Declaraciones Juradas',
+            icono: 'article',
+            url: '/declaraciones-juradas',
+            submenus: [],
+            enabled: true,
+        },
+        {
+            titulo: 'Autodiagnosticos',
+            icono: 'assignment_turned_in',
+            url: '/diagnosticos',
+            submenus: [],
+            enabled: true,
+        },
         
     ]
 

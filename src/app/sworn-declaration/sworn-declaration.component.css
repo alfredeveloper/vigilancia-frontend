@@ -1,0 +1,32 @@
+.title {
+    text-align: center;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    background-color: #fafafa;
+}
+
+.header {
+    position: fixed;
+    right: 0;
+    width: -webkit-fill-available;
+    z-index: 2;
+}
+
+.send-results {
+    float: right;
+}
+
+.card-options {
+    height: 40px;
+}
+
+.example-margin {
+    margin: 0 12px;
+}
+
+.realizado {
+    color: #09c;
+}

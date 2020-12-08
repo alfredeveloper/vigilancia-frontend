@@ -1,0 +1,217 @@
+<section class="content">
+    <div class="row">
+        <div class="col s12">
+            <div style="width: 100%;">
+                <mat-card class="header">
+                    <mat-card-content>
+                        <p class="title" [ngClass]="{'realizado': avance == 100}">DECLARACIÓN JURADA</p>
+                        <mat-progress-bar mode="determinate" [value]="avance"></mat-progress-bar>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Datos personales</mat-card-title>
+                    <mat-card-subtitle></mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombres y Apellidos</mat-label>
+                        <textarea matInput placeholder="Nombres y Apellidos" [(ngModel)]="name" name="name" required></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Celular</mat-label>
+                        <textarea matInput placeholder="Celular" [(ngModel)]="phone" name="phone" required></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Empresa</mat-label>
+                        <textarea matInput placeholder="Empresa" [(ngModel)]="bussines" name="bussines" required></textarea>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Area de Trabajo</mat-card-title>
+                    <mat-card-subtitle>1/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Area de Trabajo</mat-label>
+                        <textarea matInput placeholder="Area de Trabajo" required [(ngModel)]="cuestionario[0]" name="cuestionario0"></textarea>
+                    </mat-form-field>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Dirección</mat-card-title>
+                    <mat-card-subtitle>2/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Dirección</mat-label>
+                        <textarea matInput placeholder="Dirección" [(ngModel)]="cuestionario[1]" name="cuestionario1"></textarea>
+                    </mat-form-field>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Has experimentado sensación de alta térmica o fiebre</mat-card-title>
+                    <mat-card-subtitle>3/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-radio-group color="primary" [(ngModel)]="cuestionario[2]" name="cuestionario2">
+                        <mat-radio-button value="1">SI</mat-radio-button>
+                        <br>
+                        <br>
+                        <mat-radio-button value="2">NO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Has experimentado "DOLOR DE GARGANTA"</mat-card-title>
+                    <mat-card-subtitle>4/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-radio-group color="primary" [(ngModel)]="cuestionario[3]" name="cuestionario3">
+                        <mat-radio-button value="1">SI</mat-radio-button>
+                        <br>
+                        <br>
+                        <mat-radio-button value="2">NO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Has experimentado "Congestión o secreción nasal"</mat-card-title>
+                    <mat-card-subtitle>5/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-radio-group color="primary" [(ngModel)]="cuestionario[4]" name="cuestionario4">
+                        <mat-radio-button value="1">SI</mat-radio-button>
+                        <br>
+                        <br>
+                        <mat-radio-button value="2">NO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> ¿En los ultimos 14 dias, has tenido contacto con un caso confirmado de coronavirus COVID 19?</mat-card-title>
+                    <mat-card-subtitle>6/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-radio-group color="primary" [(ngModel)]="cuestionario[5]" name="cuestionario5">
+                        <mat-radio-button value="1">SI</mat-radio-button>
+                        <br>
+                        <br>
+                        <mat-radio-button value="2">NO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Has experimentado "Tos, estornudos o dificultad para respirar"</mat-card-title>
+                    <mat-card-subtitle>7/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-radio-group color="primary" [(ngModel)]="cuestionario[6]" name="cuestionario6">
+                        <mat-radio-button value="1">SI</mat-radio-button>
+                        <br>
+                        <br>
+                        <mat-radio-button value="2">NO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Esta tomando algún medicamento</mat-card-title>
+                    <mat-card-subtitle>8/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-radio-group color="primary" [(ngModel)]="cuestionario[7]" name="cuestionario7">
+                        <mat-radio-button value="1">SI</mat-radio-button>
+                        <br>
+                        <br>
+                        <mat-radio-button value="2">NO</mat-radio-button>
+                    </mat-radio-group>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> Fecha de declaración jurada</mat-card-title>
+                    <mat-card-subtitle>9/10 </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" (click)="picker.open()" [(ngModel)]="cuestionario[8]" name="cuestionario8" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                
+                <mat-checkbox color="primary" required [(ngModel)]="cuestionario[9]" name="cuestionario9">
+                    
+                </mat-checkbox>
+                Todos los datos expresados en esta declaración jurada de mi parte. He sido informado que de omitir o falsear información puedo perjudicar la salud de mis compañeros y la mia propia, lo cual constituye una falta grave a la salud publica, asumo sus consecuencias.
+
+            </mat-card>
+            <br>
+            <mat-card class="card-options">
+
+                <mat-card-content>
+                    <div class="send-results">
+                        <button mat-raised-button color="primary" (click)="enviarResultado()" [disabled]="avance != 100">ENVIAR RESULTADOS</button>
+                    </div>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+</section>

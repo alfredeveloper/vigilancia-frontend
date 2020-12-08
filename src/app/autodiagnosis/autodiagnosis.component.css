@@ -1,0 +1,29 @@
+.title {
+    text-align: center;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    background-color: #fafafa;
+}
+
+.header {
+    position: fixed;
+    /* bottom: 0; */
+    right: 0;
+    width: -webkit-fill-available;
+    /* border: 3px solid #73AD21; */
+    z-index: 2;
+}
+
+.send-results {
+    float: right;
+}
+
+.card-options {
+    height: 40px;
+}
+.realizado {
+    color: #09c;
+}

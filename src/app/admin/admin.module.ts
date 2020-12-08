@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 
-
 import { ADMIN_ROUTES } from './admin.routes';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,8 +13,9 @@ import { LoginGuard } from '../guards/login.guard';
 
 import { UserComponent } from './user/user.component';
 
-import { ChartsModule } from 'ng2-charts';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
+import { DeclarationsComponent } from './declarations/declarations.component';
+import { DiagnosesComponent } from './diagnoses/diagnoses.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +23,8 @@ import { CollaboratorsComponent } from './collaborators/collaborators.component'
         AdminComponent,
         UserComponent,
         CollaboratorsComponent,
+        DeclarationsComponent,
+        DiagnosesComponent,
     ],
     exports: [
         DashboardComponent,
@@ -36,7 +38,6 @@ import { CollaboratorsComponent } from './collaborators/collaborators.component'
         ADMIN_ROUTES,
         MaterialModule,
         ReactiveFormsModule,
-        ChartsModule
     ],
     entryComponents: [
     ],

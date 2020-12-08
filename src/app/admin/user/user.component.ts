@@ -106,6 +106,7 @@ export class UserComponent implements OnInit {
         this.users = response.data;
       },
       error => {
+        this.openError('Error al obtener administradores', 'OK');
         console.log('error', error);
       } 
     )

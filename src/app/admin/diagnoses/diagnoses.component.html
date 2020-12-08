@@ -1,0 +1,104 @@
+
+<div class="tiles">
+
+    <span style="color: #546e7a; font-size: 11px;">ADMINISTRACION</span>
+    
+    <h2 style="margin-top: 10px;">Autodiagnosticos</h2>
+    
+</div>
+
+<div>
+    <div style="background-color: white; width: auto; display: inline-block;">
+        <mat-form-field appearance="outline" style="margin: 0px; padding: 0px;"> 
+            <mat-label>Búsqueda</mat-label>
+            <input matInput (keyup)="applyFilterCol($event)" placeholder="Busqueda" style="background-color: white;">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        
+    </div>
+    <div style="display: inline-block;">
+        <button mat-raised-button style="margin-left: 15px;" type="button">BUSCAR</button>
+    </div>
+
+    <div class="selector-tipo">
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo de resultado</mat-label>
+            <mat-select (selectionChange)="seleccionarTipoResultado($event.value)" name="tipo_resultado">
+                <mat-option value="0">Ver todos</mat-option>
+
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.id" [matTooltip]="tipo.name">
+                    {{tipo.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+    
+<br>
+
+<mat-card class="mat-elevation-z0" style="border: 1px #e4e4e4 solid;">
+    Todos los autodiagnosticos
+
+    <button type="button" mat-button [matMenuTriggerFor]="menuAccount"  style="float: right; cursor: pointer; margin-top: -10px; padding: 0px; min-width: min-content;">
+        <mat-icon class="mat-icon" aria-hidden="false" aria-label="Example home icon">more_vert</mat-icon>
+    </button>
+    <mat-menu #menuAccount="matMenu">
+        <button type="button" mat-menu-item> <mat-icon>picture_as_pdf</mat-icon> Exportar PDF</button>
+        <button type="button" mat-menu-item> <mat-icon>description</mat-icon> Exportar Excel</button>
+        <button type="button" mat-menu-item> <mat-icon>print</mat-icon> Imprimir</button>
+    </mat-menu>
+</mat-card>
+    
+<table mat-table [dataSource]="dataSourceCol" matSort class="mat-elevation-z1">
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="persona">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Persona </th>
+        <!-- <td mat-cell *matCellDef="let row"> {{row.progress}}% </td> -->
+        <td mat-cell *matCellDef="let row"> 
+        
+        <h4 mat-line>{{row.name}}</h4>
+        
+        </td>
+    </ng-container>
+    
+    <!-- ID Column -->
+    <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
+        <!-- <td mat-cell *matCellDef="let row"> {{row.id}} </td> -->
+        <td mat-cell *matCellDef="let row"> 
+            {{row.phone}}
+        </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="empresa">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa </th>
+        <td mat-cell *matCellDef="let row"> {{row.company}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="diagnostico">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Diagnóstico </th>
+        <td mat-cell *matCellDef="let row"> {{row.diagnosis}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10px;"> Accion </th>
+        <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
+            <div style="display: flex;">
+                
+                <button (click)="verRespuestas(row)" mat-mini-fab color="primary" matTooltip="Seguimientos">
+                    <mat-icon>view_list</mat-icon>
+                </button>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsCol"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsCol;"></tr>
+    
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6">No se encontraron registros</td>
+    </tr>
+</table>
+    
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1"></mat-paginator>

@@ -19,6 +19,7 @@ import { CollaboratorAddComponent } from './collaborator/collaborator-add/collab
 import { FollowsComponent } from './follow/follows/follows.component';
 import { FollowEditComponent } from './follow/follow-edit/follow-edit.component';
 import { FollowAddComponent } from './follow/follow-add/follow-add.component';
+import { ResultDetailComponent } from './survey/result-detail/result-detail.component';
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { FollowAddComponent } from './follow/follow-add/follow-add.component';
         FollowsComponent,
         FollowEditComponent,
         FollowAddComponent,
+        ResultDetailComponent,
     ],
     exports: [
         HeaderComponent,
@@ -55,7 +57,8 @@ import { FollowAddComponent } from './follow/follow-add/follow-add.component';
         UserEditComponent,
         CollaboratorEditComponent,
         CollaboratorAddComponent,
-        FollowsComponent
+        FollowsComponent,
+        ResultDetailComponent,
     ],
     entryComponents: [
         ErrorComponent,
@@ -66,7 +69,8 @@ import { FollowAddComponent } from './follow/follow-add/follow-add.component';
         UserEditComponent,
         CollaboratorEditComponent,
         CollaboratorAddComponent,
-        FollowsComponent
+        FollowsComponent,
+        ResultDetailComponent,
     ]
 })
 

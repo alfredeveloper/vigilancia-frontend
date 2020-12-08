@@ -34,3 +34,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .width-bottom-sheet {
     width: 750px;
 }
+
+mat-form-field {
+    width: 100%;
+}

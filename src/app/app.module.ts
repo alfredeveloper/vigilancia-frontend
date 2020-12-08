@@ -15,12 +15,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SwornDeclarationComponent } from './sworn-declaration/sworn-declaration.component';
+import { AutodiagnosisComponent } from './autodiagnosis/autodiagnosis.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    SwornDeclarationComponent,
+    AutodiagnosisComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
