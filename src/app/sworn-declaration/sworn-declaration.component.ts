@@ -48,9 +48,14 @@ export class SwornDeclarationComponent implements OnInit {
 
   ngDoCheck(): void {
     this.avance = 0;
-    this.cuestionario.forEach(element => {
-      if(element != "" && element != null) {
-        this.avance += 10;
+    
+    this.cuestionario.forEach((element, key) => {
+      if(key == 0 || key == 1) {
+
+      } else {
+        if(element != "" && element != null) {
+          this.avance += 12.5;
+        }
       }
     });
   }
@@ -76,7 +81,6 @@ export class SwornDeclarationComponent implements OnInit {
           this.typeResult = this.respuestas[3].id;
         }
       }
-
     });
 
     const resultados = {
@@ -98,13 +102,14 @@ export class SwornDeclarationComponent implements OnInit {
       "typeResult": this.typeResult,
       "results": JSON.stringify({cuestionario: this.cuestionario})
     }
+
     console.log('params', params)
 
     this._surveyService.saveAutodiagnoses(params).subscribe(
       response => {
 
         localStorage.setItem('resultados', JSON.stringify(resultados));
-        
+
         this._router.navigate(['/resultados']);
 
       },

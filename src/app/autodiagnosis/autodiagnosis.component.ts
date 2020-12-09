@@ -47,9 +47,17 @@ export class AutodiagnosisComponent implements OnInit {
 
   ngDoCheck(): void {
     this.avance = 0;
-    this.cuestionario.forEach(element => {
-      if(element != "" && element != null) {
-        this.avance += 3.8;
+
+    this.cuestionario.forEach((element, key) => {
+      if(key == 3 || key == 13) {
+        console.log('key', key)
+        console.log('element', element)
+        console.log('comparacion 1', key != 3)
+        console.log('comparacion 2', key != 13)
+      } else {
+        if(element != "" && element != null) {
+          this.avance += 4;
+        }
       }
     });
   }

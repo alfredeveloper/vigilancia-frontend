@@ -8,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class ResultsComponent implements OnInit {
 
   resultados: any;
+  loader: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
     this.obtenerResultados();
+    
+    setTimeout(() => {
+      this.loader = false;
+    }, 2000);
   }
 
   obtenerResultados() {
