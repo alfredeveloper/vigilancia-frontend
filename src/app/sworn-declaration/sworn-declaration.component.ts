@@ -14,6 +14,7 @@ export class SwornDeclarationComponent implements OnInit {
 
   name: string;
   phone: string;
+  dni: number;
   bussines: string;
   
   result: string;
@@ -86,6 +87,7 @@ export class SwornDeclarationComponent implements OnInit {
     const resultados = {
       name: this.name,
       phone: this.phone,
+      dni: this.dni,
       bussines: this.bussines,
       cuestionario: this.cuestionario,
       result: this.result
@@ -94,13 +96,14 @@ export class SwornDeclarationComponent implements OnInit {
     console.log('resultados', resultados);
 
     let params = {
-      "type": "DECLARACION_JURADA",
-      "name": this.name,
-      "diagnosis": this.result,
-      "phone": this.phone,
-      "company": this.bussines,
-      "typeResult": this.typeResult,
-      "results": JSON.stringify({cuestionario: this.cuestionario})
+      type: "DECLARACION_JURADA",
+      name: this.name,
+      diagnosis: this.result,
+      phone: this.phone,
+      dni: this.dni,
+      company: this.bussines,
+      typeResult: this.typeResult,
+      results: JSON.stringify({cuestionario: this.cuestionario})
     }
 
     console.log('params', params)

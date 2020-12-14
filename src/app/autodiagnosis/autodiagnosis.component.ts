@@ -14,6 +14,7 @@ export class AutodiagnosisComponent implements OnInit {
 
   name: string;
   phone: string;
+  dni: number;
   bussines: string;
   result: string;
   typeResult: number;
@@ -107,6 +108,7 @@ export class AutodiagnosisComponent implements OnInit {
     const resultados = {
       name: this.name,
       phone: this.phone,
+      dni: this.dni,
       bussines: this.bussines,
       cuestionario: this.cuestionario,
       result: this.result
@@ -115,13 +117,14 @@ export class AutodiagnosisComponent implements OnInit {
     console.log('resultados', resultados);
 
     let params = {
-      "type": "AUTODIAGNOSTICO",
-      "name": this.name,
-      "diagnosis": this.result,
-      "phone": this.phone,
-      "company": this.bussines,
-      "typeResult": this.typeResult,
-      "results": JSON.stringify({cuestionario: this.cuestionario})
+      type: "AUTODIAGNOSTICO",
+      name: this.name,
+      diagnosis: this.result,
+      phone: this.phone,
+      dni: this.dni,
+      company: this.bussines,
+      typeResult: this.typeResult,
+      results: JSON.stringify({cuestionario: this.cuestionario})
     }
     console.log('params', params)
 

@@ -10,6 +10,7 @@ import { Patient } from 'src/app/models/patient';
 import { PatientService } from 'src/app/services/patient.service';
 import { CollaboratorAddComponent } from 'src/app/shareds/collaborator/collaborator-add/collaborator-add.component';
 import { CollaboratorEditComponent } from 'src/app/shareds/collaborator/collaborator-edit/collaborator-edit.component';
+import { CollaboratorResultComponent } from 'src/app/shareds/collaborator/collaborator-result/collaborator-result.component';
 import { SuccessComponent } from 'src/app/shareds/dialog/success/success.component';
 import { FollowsComponent } from 'src/app/shareds/follow/follows/follows.component';
 
@@ -94,6 +95,34 @@ export class CollaboratorsComponent implements OnInit {
   verSeguimientos(colaborador) {
     const dialogRef = this.dialog.open(FollowsComponent, {
       width: '700px',
+      data: colaborador,
+      disableClose: true
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si', result)
+      }
+    })
+  }
+
+  verResultadosAuto(colaborador) {
+    const dialogRef = this.dialog.open(CollaboratorResultComponent, {
+      width: '300px',
+      data: colaborador,
+      disableClose: true
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Si', result)
+      }
+    })
+  }
+
+  verResultadosDec(colaborador) {
+    const dialogRef = this.dialog.open(CollaboratorResultComponent, {
+      width: '300px',
       data: colaborador,
       disableClose: true
     })

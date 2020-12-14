@@ -32,6 +32,11 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
+                        <mat-label>DNI</mat-label>
+                        <input type="number" max="8" matInput placeholder="DNI" [(ngModel)]="dni" name="dni" required>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
                         <mat-label>Empresa</mat-label>
                         <input matInput placeholder="Empresa" [(ngModel)]="bussines" name="bussines" required>
                     </mat-form-field>
