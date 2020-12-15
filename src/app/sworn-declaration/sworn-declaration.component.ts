@@ -22,6 +22,8 @@ export class SwornDeclarationComponent implements OnInit {
 
   cuestionario: any = new Array(10);
 
+  loader: boolean = false;
+
   respuestas = [
     {
       name: "Presenta síntomas relacionados al COVID-19, por prevención quédate en casa y el personal de salud se comunicará contigo prontamente",
@@ -65,6 +67,8 @@ export class SwornDeclarationComponent implements OnInit {
   }
 
   enviarResultado() {
+
+    this.loader = true;
 
     this.cuestionario.forEach((element, key) => {
       console.log(`indice: `, key)
@@ -110,13 +114,14 @@ export class SwornDeclarationComponent implements OnInit {
 
     this._surveyService.saveAutodiagnoses(params).subscribe(
       response => {
-
+        this.loader = false;
         localStorage.setItem('resultados', JSON.stringify(resultados));
-
+        
         this._router.navigate(['/resultados']);
-
+        
       },
       error => {
+        this.loader = false;
         this.openError('Error al registrar autodiagnóstico', 'OK');
       }
     )

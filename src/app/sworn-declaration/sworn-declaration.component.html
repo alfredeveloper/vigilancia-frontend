@@ -212,7 +212,8 @@
 
                 <mat-card-content>
                     <div class="send-results">
-                        <button mat-raised-button color="primary" (click)="enviarResultado()" [disabled]="avance != 100">ENVIAR RESULTADOS</button>
+                        <button *ngIf="!loader" mat-raised-button color="primary" (click)="enviarResultado()" [disabled]="avance != 100">ENVIAR RESULTADOS</button>
+                        <mat-spinner *ngIf="loader" diameter="40"></mat-spinner>
                     </div>
                 </mat-card-content>
 
