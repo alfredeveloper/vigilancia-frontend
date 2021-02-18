@@ -42,6 +42,11 @@ export class AutodiagnosisComponent implements OnInit {
     }
   ];
 
+  pregunta1 = true;
+  pregunta2 = true;
+  pregunta3 = true;
+  pregunta4 = true;
+
   constructor(
     private _router: Router,
     private _surveyService: SurveyService,
@@ -69,6 +74,21 @@ export class AutodiagnosisComponent implements OnInit {
     
   }
 
+  cambioPregunta1(event) {
+    this.pregunta1 = !event.checked
+  }
+
+  cambioPregunta2(event) {
+    this.pregunta2 = !event.checked
+  }
+
+  cambioPregunta3(event) {
+    this.pregunta3 = !event.checked
+  }
+
+  cambioPregunta4(event) {
+    this.pregunta4 = !event.checked
+  }
   enviarResultado() {
     this.loader = true;
     this.cuestionario.forEach((element, key) => {

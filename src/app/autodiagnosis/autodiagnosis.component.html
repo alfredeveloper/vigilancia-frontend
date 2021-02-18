@@ -33,8 +33,17 @@
                         <textarea matInput placeholder="Celular" [(ngModel)]="phone" name="phone" required></textarea>
                     </mat-form-field>
 
+                    <mat-form-field>
+                        <mat-label>Tipo de documento</mat-label>
+                        <mat-select name="origin" required>
+                            <mat-option value="DNI">
+                                DNI
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
                     <mat-form-field appearance="outline">
-                        <mat-label>DNI</mat-label>
+                        <mat-label>Nro de documento</mat-label>
                         <input type="number" max="8" matInput placeholder="DNI" [(ngModel)]="dni" name="dni" required>
                     </mat-form-field>
 
@@ -45,485 +54,94 @@
                 </mat-card-content>
             </mat-card>
             <br>
+
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title> Has experimentado "Congestión o secreción nasal"</mat-card-title>
-                    <mat-card-subtitle>1/27</mat-card-subtitle>
+                    <mat-card-title>¿Paciente con síntomas de infección respiratoria aguda que presente tos y/o dolor de garganta y además uno de los siguientes signos/síntomas?</mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta1($event)">Seleccionar</mat-checkbox>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Malestar general</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Fiebre</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Cefalea</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Congestión Nasal</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Diarrea</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Dificultad para respirar</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Pérdida del gusto (ageusia)</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Pérdida del olfato (anosmia)</mat-checkbox>
+                </mat-card-content>
+            </mat-card>
+            <br>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>¿Caso sospechoso con IRAG: Paciente con síntomas de infección respiratoria aguda grave, o  fiebre o temperatura actual >= 38°C, y además uno de los siguientes signos/síntomas?</mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta2($event)">Seleccionar</mat-checkbox>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2">Fiebre o temperatura actual >= 38°C</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2">Tos con inicio de los últimos 10 días</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2">Requiere hospitalización</mat-checkbox>
+                </mat-card-content>
+            </mat-card>
+            <br>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> ¿Caso sospechoso con antecedente epidemiológico y además uno de las siguientes acciones?</mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta3($event)">Seleccionar</mat-checkbox>
+                        
+                    </mat-card-subtitle>
 
                 </mat-card-header>
 
                 <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[0]" name="cuestionario0" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta3">Que estuvo en contacto con caso probable o confirmado</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta3">Que se relacionó a grupo con al menos un confirmado 14 días previos al inicio de síntomas</mat-checkbox>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>¿Caso sospechoso, con imágenes de tórax, que muestra hallazgo sugestivo de Covid-19 en?</mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta4($event)">Seleccionar</mat-checkbox>
+                        
+                    </mat-card-subtitle>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4">Radiografía de tórax.</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4">Tomografía computarizada de tórax.</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4">Ecografía pulmonar</mat-checkbox>
                 </mat-card-content>
 
             </mat-card>
             <br>
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title> Has experimentado  pérdida del olfato o pérdida del gusto</mat-card-title>
-                    <mat-card-subtitle>2/27</mat-card-subtitle>
+                    <mat-card-title> ¿Persona con inicio reciente de anosmia (pérdida del olfato) o  de ageustia (pérdida del gusto)?</mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-checkbox class="vs-checkbox" color="primary">Seleccionar</mat-checkbox>
+                        
+                    </mat-card-subtitle>
 
                 </mat-card-header>
 
                 <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[1]" name="cuestionario1" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
+                    
                 </mat-card-content>
 
             </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has experimentado sensación de alta térmica o fiebre</mat-card-title>
-                    <mat-card-subtitle>3/27</mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[2]" name="cuestionario2" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Si has experimentado fiebre cual es la temperatura</mat-card-title>
-                    <mat-card-subtitle>4/27</mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Temperatura (opcional)</mat-label>
-                        <input type="number" matInput placeholder="Temperatura"  [(ngModel)]="cuestionario[3]" name="cuestionario3">
-                    </mat-form-field>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has experimentado "DOLOR DE GARGANTA"</mat-card-title>
-                    <mat-card-subtitle>5/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[4]" name="cuestionario4" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has experimentado expectoración o flema amarilla o verdosa</mat-card-title>
-                    <mat-card-subtitle>6/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[5]" name="cuestionario5" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has experimentado "Tos, estornudos o dificultad para respirar"</mat-card-title>
-                    <mat-card-subtitle>7/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[6]" name="cuestionario6" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has experimentado  dolor abdominal, náuseas o diarrea</mat-card-title>
-                    <mat-card-subtitle>8/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[7]" name="cuestionario7" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Ha experimentado  dolor en el pecho</mat-card-title>
-                    <mat-card-subtitle>9/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[8]" name="cuestionario8" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has presentado Desorientación o confusión</mat-card-title>
-                    <mat-card-subtitle>10/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[9]" name="cuestionario9" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Has presentado coloración azul en los labios</mat-card-title>
-                    <mat-card-subtitle>11/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[10]" name="cuestionario10" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> ¿Haz recibido un sms o alerta de la app auto diagnostico sobre posible contacto con un caso confirmado de covid-19, en los ultimos 14 dias?</mat-card-title>
-                    <mat-card-subtitle>12/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[11]" name="cuestionario11" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> ¿En los ultimos 14 dias, has tenido contacto con un caso confirmado de coronavirus COVID 19?</mat-card-title>
-                    <mat-card-subtitle>13/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[12]" name="cuestionario12" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Está tomando alguna medicación (detallar cuales son:)</mat-card-title>
-                    <mat-card-subtitle>14/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Medicación (opcional)</mat-label>
-                        <textarea matInput placeholder="Medicación" [(ngModel)]="cuestionario[13]" name="cuestionario13"></textarea>
-                    </mat-form-field>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Vives en la misma casa con familiar de enfermedad cronica</mat-card-title>
-                    <mat-card-subtitle>15/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-radio-group [(ngModel)]="cuestionario[14]" name="cuestionario14" color="primary">
-                    <mat-radio-button value="1">SI</mat-radio-button>
-                    <br>
-                    <br>
-                    <mat-radio-button value="2">NO</mat-radio-button>
-                </mat-radio-group>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> ¿Trabajas en algún establecimiento de salud?</mat-card-title>
-                    <mat-card-subtitle>16/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[15]" name="cuestionario15" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Ha visitado un establecimiento de salud</mat-card-title>
-                    <mat-card-subtitle>17/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[16]" name="cuestionario16" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Su edad mayor a 65 años</mat-card-title>
-                    <mat-card-subtitle>18/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[17]" name="cuestionario17" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Tienes obesidad con IMC de 40 a más</mat-card-title>
-                    <mat-card-subtitle>19/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[18]" name="cuestionario18" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de Asma o enfermedad respiratoria crónica</mat-card-title>
-                    <mat-card-subtitle>20/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[19]" name="cuestionario19" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de enfermedad pulmonar crónica</mat-card-title>
-                    <mat-card-subtitle>21/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[20]" name="cuestionario20" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres Diabetes mellitus</mat-card-title>
-                    <mat-card-subtitle>22/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[21]" name="cuestionario21" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de Hipertención</mat-card-title>
-                    <mat-card-subtitle>23/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[22]" name="cuestionario22" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de enfermedad o tratamiento inmunosupresor</mat-card-title>
-                    <mat-card-subtitle>24/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[23]" name="cuestionario23" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de enfermedad cardiovascular</mat-card-title>
-                    <mat-card-subtitle>25/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[24]" name="cuestionario24" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de insuficiencia cronica</mat-card-title>
-                    <mat-card-subtitle>26/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[25]" name="cuestionario25" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> Sufres de cancer</mat-card-title>
-                    <mat-card-subtitle>27/27 </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-radio-group [(ngModel)]="cuestionario[26]" name="cuestionario26" color="primary">
-                        <mat-radio-button value="1">SI</mat-radio-button>
-                        <br>
-                        <br>
-                        <mat-radio-button value="2">NO</mat-radio-button>
-                    </mat-radio-group>
-                </mat-card-content>
-
-            </mat-card>
+            
             <br>
             <mat-card class="card-options">
 

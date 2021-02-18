@@ -18,7 +18,7 @@ export class FollowAddComponent implements OnInit {
     private _followService: FollowService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) { 
-    this.follow = new Follow(0,false,false,false,false,false,false,false,false,false,false,false,false,false,false,'','',false,false,false,null);
+    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {

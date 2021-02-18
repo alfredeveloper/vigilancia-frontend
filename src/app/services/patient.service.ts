@@ -43,4 +43,22 @@ export class PatientService {
 
     }
 
+    obtenerDepartamentos() : Observable<any> {
+
+        return this.http.get<any>(`${environment.apiUrl}departamentos`);
+
+    }
+
+    obtenerProvincias(departamento_id) : Observable<any> {
+
+        return this.http.get<any>(`${environment.apiUrl}provincias/${departamento_id}`);
+
+    }
+
+    obtenerDistritos(provincia_id) : Observable<any> {
+
+        return this.http.get<any>(`${environment.apiUrl}distritos/${provincia_id}`);
+
+    }
+
 }

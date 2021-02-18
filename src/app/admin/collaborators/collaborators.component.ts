@@ -27,7 +27,7 @@ export class CollaboratorsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginatorCol: MatPaginator;
   @ViewChild(MatSort, {static: true}) sortCol: MatSort;
 
-  patient: Patient = new Patient('', '', '', '', '', '', '', '', '', new Date(), '', '');
+  patient: Patient = new Patient('','', '', '', '', '', '', '', '', '', new Date(), '', '', '', '', '', '', '');
   patients: any;
 
   constructor(

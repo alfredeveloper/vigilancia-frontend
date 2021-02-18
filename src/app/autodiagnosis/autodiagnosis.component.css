@@ -27,3 +27,8 @@
 .realizado {
     color: #09c;
 }
+
+.vs-checkbox {
+    line-height: 2.5;
+    display: block;
+}

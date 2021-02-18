@@ -1,106 +1,363 @@
-<h1 mat-dialog-title>Nuevo Seguimiento</h1>
+<h1 mat-dialog-title>Registro de Seguimiento Clínico de Colaborador</h1>
 
 <form #f="ngForm" ngNativeValidate (ngSubmit)="registrarSeguimiento(f)">
 
     <div>
         <div class="row">
-            <div class="col s4">
+            <div class="col s3">
+                <mat-form-field>
+                    <mat-label>Tipo de documento</mat-label>
+                    <mat-select name="type_document" value="DNI">
+                        <mat-option value="DNI">
+                            DNI
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s3">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Temperatura</mat-label>
-                    <input matInput placeholder="Temperatura" type="number" [(ngModel)]="follow.temperature" name="temperature">
+                    <mat-label>Nro. de Documento</mat-label>
+                    <input matInput placeholder="Nro. de Documento" type="number" name="numdoc" value="93939393">
                 </mat-form-field>
-                
-                <mat-form-field>
-                    <mat-label>Prueba Diag. Serológica</mat-label>
-                    <mat-select [(ngModel)]="follow.serological_diagnostic_test" name="serological_diagnostic_test">
-                        <mat-option value="PRUEBA 1">
-                            Prueba 1
-                        </mat-option>
-                        <mat-option value="PRUEBA 2">
-                            Prueba 2
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Seguimiento del caso</mat-label>
-                    <mat-select [(ngModel)]="follow.case_follow_up" name="case_follow_up">
-                        <mat-option value="SOSPECHOSO">
-                            Sospechoso
-                        </mat-option>
-                        <mat-option value="CONFIRMADO">
-                            Confirmado
-                        </mat-option>
-                        <mat-option value="DESCARTADO">
-                            Descartado
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.chills_sweating" name="chills_sweating">Escalofrios / Sudoración</mat-checkbox>
-                </p>
-                
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.cough" name="cough">Tos</mat-checkbox>
-                </p>
-                
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.sore_throat" name="sore_throat">Dolor de garganta</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.chest_pain" name="chest_pain">Dolor de pecho</mat-checkbox>
-                </p>
             </div>
 
-            <div class="col s4">
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.anosmia" name="anosmia">Anosmia</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.dysgeusia" name="dysgeusia">Disgeusia</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.nasal_congestion" name="nasal_congestion">Congestion Nasal</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.general_discomfort" name="general_discomfort">Malestar General</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.difficulty_breathing" name="difficulty_breathing">Dificultad para respirar</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.diarrhea" name="diarrhea">Diarrea</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.vomits" name="vomits">Nauseas / Vómitos</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.headache" name="headache">Cefalea</mat-checkbox>
-                </p>
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput placeholder="Nombres" type="text" name="name" value="Alfredo">
+                </mat-form-field>
             </div>
-            <div class="col s4">
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.disorientation" name="disorientation">Desorientación</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.cyanosis" name="cyanosis">Cianosis</mat-checkbox>
-                </p>
-                
-                <h3 mat-dialog-title>Evolución</h3>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.recovered" name="recovered">Recuperado</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.transfer_to_hospital" name="transfer_to_hospital">Traslado a hospital</mat-checkbox>
-                </p>
-                <p>
-                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="follow.passed_away" name="passed_away">Fallecido</mat-checkbox>
-                </p>
+
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput placeholder="Apellidos" type="text" name="lastname" value="Yupanqui Alarcon">
+                </mat-form-field>
             </div>
             
+            <div class="col s3">
+                <mat-form-field>
+                    <mat-label>Procedencia</mat-label>
+                    <mat-select name="type_document" value="DNI">
+                        <mat-option value="DNI">
+                            Sospechosa
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s3">
+                <mat-form-field>
+                    <mat-label>Fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha" required name="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <button mat-stroked-button color="primary">Confirmación de casos</button>
+            </div>
         </div>
+        
+        <mat-divider></mat-divider>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>1. Funciones vitales</h3>
+            </div>
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>PA</mat-label>
+                    <input matInput placeholder="PA" type="number" name="pa">
+                </mat-form-field>   
+            </div>
     
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>FC</mat-label>
+                    <input matInput placeholder="FC" type="number" name="fc">
+                </mat-form-field>   
+            </div>
+    
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>FR</mat-label>
+                    <input matInput placeholder="FR" type="number" name="fr">
+                </mat-form-field>   
+            </div>
+    
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Temperatura</mat-label>
+                    <input matInput placeholder="Temperatura" type="number" name="temperature">
+                </mat-form-field>   
+            </div>
+    
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Pulsioximetria</mat-label>
+                    <input matInput placeholder="Pulsioximetria" type="number" name="pulso">
+                </mat-form-field>   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>2. Signos y síntomas</h3>
+            </div>
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Tos</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor de garganta</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Congestion nasal</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Fiebre</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Malestar general</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Dificultad respiratoria</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Diarrea</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Nausea / Vomito</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Cefalea</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Irritabilidad / Confusión</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor muscular</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor abdominal</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor de pecho</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor en articulaciones</mat-checkbox>
+                </p>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Otro (especificar)</mat-label>
+                    <input matInput placeholder="Otro (especificar)" type="text" name="pulso">
+                </mat-form-field>   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>3. Signos de alarma</h3>
+            </div>
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Disnea</mat-checkbox>
+                </p>
+            </div>  
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Taquipnea (>= 22 pm)</mat-checkbox>
+                </p>
+            </div> 
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Saturación de oxígeno < 92%</mat-checkbox>
+                </p>
+            </div>   
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Alteración de la conciencia</mat-checkbox>
+                </p>
+            </div>      
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>4. Tratamiento Específico</h3>
+            </div>
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Fosfato de cloriquina</mat-checkbox>
+                </p>
+            </div>  
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Hidorxicioroquina</mat-checkbox>
+                </p>
+            </div> 
+            <div class="col s4">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough">Hidorxicioroquina + Azitromicina</mat-checkbox>
+                </p>
+            </div>   
+            <div class="col s4">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Otro (especificar)</mat-label>
+                    <input matInput placeholder="Otro (especificar)" type="text" name="pulso">
+                </mat-form-field>   
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>5. Tratamiento Antimicrobiano</h3>
+            </div>
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Antibiótico (especificar)</mat-label>
+                    <input matInput placeholder="Antibiótico (especificar)" type="text" name="antibiotico">
+                </mat-form-field>   
+            </div>  
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Antiviral (especificar)</mat-label>
+                    <input matInput placeholder="Antiviral (especificar)" type="text" name="antiviral">
+                </mat-form-field>   
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>6. Anticoagulación profiláctico</h3>
+            </div>
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Enoxaparima mg</mat-label>
+                    <input matInput placeholder="Enoxaparima mg" type="text" name="antibiotico">
+                </mat-form-field>   
+            </div>  
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Otro (especificar)</mat-label>
+                    <input matInput placeholder="Otro (especificar)" type="text" name="antiviral">
+                </mat-form-field>   
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>7. Otra especificación</h3>
+            </div>
+            <div class="col s3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Especificar medicamento</mat-label>
+                    <input matInput placeholder="Especificar medicamento" type="text" name="antibiotico">
+                </mat-form-field>   
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>Evolucion</h3>
+            </div>
+            <div class="col s3">
+                <mat-form-field>
+                    <mat-label>Estado</mat-label>
+                    <mat-select name="type_document" value="DNI">
+                        <mat-option value="L">
+                            Leve
+                        </mat-option>
+                        <mat-option value="M">
+                            Moderado
+                        </mat-option>
+                        <mat-option value="S">
+                            Severo
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>  
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <h3>Condicion de egreso</h3>
+            </div>
+            <div class="col s3">
+                <mat-form-field>
+                    <mat-label>Condición de egreso</mat-label>
+                    <mat-select name="type_document" value="DNI">
+                        <mat-option value="A">
+                            Recuperado
+                        </mat-option>
+                        <mat-option value="B">
+                            Traslado Hospital
+                        </mat-option>
+                        <mat-option value="C">
+                            Traslado UCI
+                        </mat-option>
+                        <mat-option value="D">
+                            Fallecido
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>  
+        </div>
+        
+        <div class="row">
+            <div class="col s12">
+                <button type="button" mat-stroked-button color="primary">Consulta</button>
+                &nbsp;
+                <button type="button" mat-stroked-button color="primary">G. Temperaturas</button>
+            </div>
+        </div>
+        
+        <br>
+
+        <mat-divider></mat-divider>
     </div>
     
     <div mat-dialog-actions class="bottom-sheet">

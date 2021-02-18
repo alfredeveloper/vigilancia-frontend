@@ -49,6 +49,10 @@ export class CollaboratorAddComponent implements OnInit {
   patient: Patient;
   follow: Follow;
 
+  departamentos: Array<any> = []
+  provincias: Array<any> = []
+  distritos: Array<any> = []
+
   constructor(
     public dialogRef: MatDialogRef<CollaboratorAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -56,11 +60,12 @@ export class CollaboratorAddComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) { 
-    this.patient = new Patient('','','','','','','','','',new Date(),'','');
-    this.follow = new Follow(0,false,false,false,false,false,false,false,false,false,false,false,false,false,false,'','',false,false,false,null);
+    this.patient = new Patient('','','','','','','','','','',new Date(),'','','','','','','');
+    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {
+    this.listarDepartamentos();
   }
 
   registrarColaborador(f: NgForm): void {
@@ -82,6 +87,45 @@ export class CollaboratorAddComponent implements OnInit {
       }
     )
 
+  }
+
+  listarDepartamentos() {
+    this._patientService.obtenerDepartamentos().subscribe(
+      response => {
+        this.departamentos = response.data;
+      },
+      error => {
+        this.openError('Error al obtener departamentos', 'OK');
+      }
+    )
+  }
+
+  seleccionarDepartamento() {
+    this._patientService.obtenerProvincias(this.patient.departamento).subscribe(
+      response => {
+        this.provincias = response.data;
+      },
+      error => { 
+        this.openError('Error al obtener provincias', 'OK');
+      }
+    )
+  }
+
+  listarProvincias() {
+  }
+
+  seleccionarProvincia() {
+    this._patientService.obtenerDistritos(this.patient.provincia).subscribe(
+      response => {
+        this.distritos = response.data;
+      },
+      error => {
+        this.openError('Error al obtener distritos', 'OK');
+      }
+    )
+  }
+
+  listarDistritos() {
   }
 
   extend(dest, src) { 

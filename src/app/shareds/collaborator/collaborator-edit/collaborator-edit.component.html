@@ -57,8 +57,69 @@
 
             <div class="col s6">
                 <mat-form-field>
+                    <mat-label>Clasificación clínica</mat-label>
+                    <mat-select name="origin" required>
+                        <mat-option value="LEVE">
+                            L (Leve)
+                        </mat-option>
+                        <mat-option value="MODERADA">
+                            M (Moderada)
+                        </mat-option>
+                        <mat-option value="SEVERA">
+                            S (Severa)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Departamento</mat-label>
+                    <mat-select name="origin" required>
+                        <mat-option value="LEVE">
+                            L (Leve)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Departamento</mat-label>
+                    <mat-select name="origin" required>
+                        <mat-option value="LEVE">
+                            L (Leve)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Provincia</mat-label>
+                    <mat-select name="origin" required>
+                        <mat-option value="LEVE">
+                            L (Leve)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
                     <mat-label>Distrito</mat-label>
-                    <input type="text" matInput placeholder="Distrito" [(ngModel)]="data.district" required name="district">
+                    <mat-select name="origin" required>
+                        <mat-option value="LEVE">
+                            L (Leve)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Dirección</mat-label>
+                    <input type="text" matInput placeholder="Dirección" required name="address">
                 </mat-form-field>
             </div>
 
@@ -82,14 +143,31 @@
                 <mat-form-field>
                     <mat-label>Procedencia autodiagnóstico</mat-label>
                     <mat-select [(ngModel)]="data.origin" name="origin" required>
-                        <mat-option value="CON SINTOMA">
-                            Con síntoma
+                        <mat-option value="SOSPECHOSO">
+                            Sospechoso
                         </mat-option>
-                        <mat-option value="CON SOSPECHA">
-                            Con sospecha
+                        <mat-option value="PROBABLE">
+                            Probable
                         </mat-option>
-                        <mat-option value="CON RIESGO">
-                            Con riesgo
+                        <mat-option value="SOSPECHOSO_PROBABLE">
+                            Sospechoso probable
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Confirmación del caso</mat-label>
+                    <mat-select name="origin" required>
+                        <mat-option value="CONFIRMADO_SINTOMATICO">
+                            Confirmado sintomático
+                        </mat-option>
+                        <mat-option value="CONFIRMADO_ASINTOMATICO">
+                            Confirmado asintomático
+                        </mat-option>
+                        <mat-option value="DESCARTADO">
+                            Descartado
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -103,10 +181,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <mat-radio-button color="primary" value="NO">NO</mat-radio-button>
                 </mat-radio-group>
-                <!-- <mat-form-field>
-                    <mat-label>Control</mat-label>
-                    <input type="text" matInput placeholder="Control" [(ngModel)]="data.control" required name="control">
-                </mat-form-field> -->
+                
             </div>
 
         </div>
