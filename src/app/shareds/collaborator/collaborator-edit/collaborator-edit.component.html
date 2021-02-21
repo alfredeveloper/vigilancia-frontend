@@ -6,8 +6,20 @@
         <div class="row">
             <div class="col s6">
                 <mat-form-field>
-                    <mat-label>DNI</mat-label>
-                    <input type="number" matInput placeholder="DNI" [(ngModel)]="data.dni" required name="email">
+                    <mat-label>Tipo de Documento</mat-label>
+                    <mat-select name="tipo_documento" [(ngModel)]="data.type_document" required>
+                        <mat-option *ngFor="let tipo of tipos" [value]="tipo._id">
+                            {{tipo.name}}
+                        </mat-option>
+                        
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col s6">
+                <mat-form-field>
+                    <mat-label>Nro de Documento</mat-label>
+                    <input type="number" matInput placeholder="Nro de Documento" [(ngModel)]="data.document" required name="email">
                 </mat-form-field>
             </div>
     
@@ -58,7 +70,7 @@
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Clasificación clínica</mat-label>
-                    <mat-select name="origin" required>
+                    <mat-select name="clasification" [(ngModel)]="data.clasification" required>
                         <mat-option value="LEVE">
                             L (Leve)
                         </mat-option>
@@ -75,9 +87,9 @@
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Departamento</mat-label>
-                    <mat-select name="origin" required>
-                        <mat-option value="LEVE">
-                            L (Leve)
+                    <mat-select name="departamento" required [(ngModel)]="data.departamento" (selectionChange)="seleccionarDepartamento()">
+                        <mat-option [value]="departamento.id_ubigeo" *ngFor="let departamento of departamentos">
+                            {{departamento.nombre_ubigeo}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -85,10 +97,10 @@
 
             <div class="col s6">
                 <mat-form-field>
-                    <mat-label>Departamento</mat-label>
-                    <mat-select name="origin" required>
-                        <mat-option value="LEVE">
-                            L (Leve)
+                    <mat-label>Provincias</mat-label>
+                    <mat-select name="provincia" required [(ngModel)]="data.provincia" (selectionChange)="seleccionarProvincia()">
+                        <mat-option [value]="provincia.id_ubigeo" *ngFor="let provincia of provincias">
+                            {{provincia.nombre_ubigeo}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -96,21 +108,10 @@
 
             <div class="col s6">
                 <mat-form-field>
-                    <mat-label>Provincia</mat-label>
-                    <mat-select name="origin" required>
-                        <mat-option value="LEVE">
-                            L (Leve)
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-
-            <div class="col s6">
-                <mat-form-field>
-                    <mat-label>Distrito</mat-label>
-                    <mat-select name="origin" required>
-                        <mat-option value="LEVE">
-                            L (Leve)
+                    <mat-label>Distritos</mat-label>
+                    <mat-select name="district" required [(ngModel)]="data.district">
+                        <mat-option [value]="distrito.id_ubigeo" *ngFor="let distrito of distritos">
+                            {{distrito.nombre_ubigeo}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -119,21 +120,21 @@
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Dirección</mat-label>
-                    <input type="text" matInput placeholder="Dirección" required name="address">
+                    <input type="text" matInput placeholder="Dirección" [(ngModel)]="data.address" required name="address">
                 </mat-form-field>
             </div>
 
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Empresa/Otra/Contratista</mat-label>
-                    <input type="text" matInput placeholder="Empresa/Otra/Contratista" [(ngModel)]="data.company" required name="job">
+                    <input type="text" matInput placeholder="Empresa/Otra/Contratista" [(ngModel)]="data.company" required name="company">
                 </mat-form-field>
             </div>
 
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Fecha de inicio</mat-label>
-                    <input matInput [matDatepicker]="picker1" placeholder="Fecha de inicio" [(ngModel)]="data.start_date" required name="start_date">
+                    <input disabled matInput [matDatepicker]="picker1" placeholder="Fecha de inicio" [(ngModel)]="data.start_date" name="start_date">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
@@ -142,7 +143,7 @@
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Procedencia autodiagnóstico</mat-label>
-                    <mat-select [(ngModel)]="data.origin" name="origin" required>
+                    <mat-select disabled [(ngModel)]="data.origin" name="origin">
                         <mat-option value="SOSPECHOSO">
                             Sospechoso
                         </mat-option>
@@ -159,7 +160,7 @@
             <div class="col s6">
                 <mat-form-field>
                     <mat-label>Confirmación del caso</mat-label>
-                    <mat-select name="origin" required>
+                    <mat-select disabled name="confirmation" [(ngModel)]="data.confirmation">
                         <mat-option value="CONFIRMADO_SINTOMATICO">
                             Confirmado sintomático
                         </mat-option>
@@ -181,7 +182,6 @@
                     &nbsp;&nbsp;&nbsp;
                     <mat-radio-button color="primary" value="NO">NO</mat-radio-button>
                 </mat-radio-group>
-                
             </div>
 
         </div>

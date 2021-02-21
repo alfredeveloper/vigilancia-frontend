@@ -1,159 +1,185 @@
 <section class="content">
+    <div style="width: 100%;">
+        <mat-toolbar color="primary" class="mat-elevation-z2">
+            <span>AUTODIAGNÓSTICO COVID 19</span>
+        </mat-toolbar>
+        
+    </div>
+    
     <div class="row">
         <div class="col s12">
-            <div style="width: 100%;">
-                <mat-card class="header">
-                    <mat-card-content>
-                        <p class="title" [ngClass]="{'realizado': avance >= 100}">AUTODIAGNÓSTICO COVID 19</p>
-                        <mat-progress-bar mode="determinate" [value]="avance"></mat-progress-bar>
-    
-                    </mat-card-content>
-                </mat-card>
-            </div>
             <br>
-            <br>
-            <br>
-            <br>
-            
+
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title> Datos personales</mat-card-title>
-                    <mat-card-subtitle></mat-card-subtitle>
+                    <mat-card-title> 
+                        Datos personales
+                    </mat-card-title>
 
                 </mat-card-header>
 
                 <mat-card-content>
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="buscarPaciente(f)">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tipo de documento</mat-label>
+                            <mat-select name="type_document" required>
+                                <mat-option value="DNI">
+                                    DNI
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nro de documento</mat-label>
+                            <input type="number" max="99999999" matInput placeholder="DNI" [(ngModel)]="dni" name="dni" required>
+                        </mat-form-field>
+
+                        <button mat-stroked-button color="primary" class="btn-search" type="submit">Buscar</button>
+                    </form>
+                    <br>
                     <mat-form-field appearance="outline">
                         <mat-label>Nombres y Apellidos</mat-label>
-                        <textarea matInput placeholder="Nombres y Apellidos" [(ngModel)]="name" name="name" required></textarea>
+                        <input matInput placeholder="Nombres y Apellidos" [(ngModel)]="name" name="name" required disabled>
                     </mat-form-field>
-
                     <mat-form-field appearance="outline">
                         <mat-label>Celular</mat-label>
-                        <textarea matInput placeholder="Celular" [(ngModel)]="phone" name="phone" required></textarea>
+                        <input matInput placeholder="Celular" [(ngModel)]="phone" name="phone" required disabled>
                     </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Tipo de documento</mat-label>
-                        <mat-select name="origin" required>
-                            <mat-option value="DNI">
-                                DNI
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Nro de documento</mat-label>
-                        <input type="number" max="8" matInput placeholder="DNI" [(ngModel)]="dni" name="dni" required>
-                    </mat-form-field>
-
                     <mat-form-field appearance="outline">
                         <mat-label>Empresa</mat-label>
-                        <textarea matInput placeholder="Empresa" [(ngModel)]="bussines" name="bussines" required></textarea>
+                        <input matInput placeholder="Empresa" [(ngModel)]="bussines" name="bussines" required disabled>
                     </mat-form-field>
+
                 </mat-card-content>
             </mat-card>
             <br>
 
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title>¿Paciente con síntomas de infección respiratoria aguda que presente tos y/o dolor de garganta y además uno de los siguientes signos/síntomas?</mat-card-title>
-                    <mat-card-subtitle>
-                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta1($event)">Seleccionar</mat-checkbox>
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Malestar general</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Fiebre</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Cefalea</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Congestión Nasal</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Diarrea</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Dificultad para respirar</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Pérdida del gusto (ageusia)</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1">Pérdida del olfato (anosmia)</mat-checkbox>
-                </mat-card-content>
-            </mat-card>
-            <br>
-
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>¿Caso sospechoso con IRAG: Paciente con síntomas de infección respiratoria aguda grave, o  fiebre o temperatura actual >= 38°C, y además uno de los siguientes signos/síntomas?</mat-card-title>
-                    <mat-card-subtitle>
-                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta2($event)">Seleccionar</mat-checkbox>
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2">Fiebre o temperatura actual >= 38°C</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2">Tos con inicio de los últimos 10 días</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2">Requiere hospitalización</mat-checkbox>
-                </mat-card-content>
-            </mat-card>
-            <br>
-
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> ¿Caso sospechoso con antecedente epidemiológico y además uno de las siguientes acciones?</mat-card-title>
-                    <mat-card-subtitle>
-                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta3($event)">Seleccionar</mat-checkbox>
-                        
-                    </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta3">Que estuvo en contacto con caso probable o confirmado</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta3">Que se relacionó a grupo con al menos un confirmado 14 días previos al inicio de síntomas</mat-checkbox>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>¿Caso sospechoso, con imágenes de tórax, que muestra hallazgo sugestivo de Covid-19 en?</mat-card-title>
-                    <mat-card-subtitle>
-                        <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta4($event)">Seleccionar</mat-checkbox>
-                        
-                    </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4">Radiografía de tórax.</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4">Tomografía computarizada de tórax.</mat-checkbox>
-                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4">Ecografía pulmonar</mat-checkbox>
-                </mat-card-content>
-
-            </mat-card>
-            <br>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> ¿Persona con inicio reciente de anosmia (pérdida del olfato) o  de ageustia (pérdida del gusto)?</mat-card-title>
-                    <mat-card-subtitle>
-                        <mat-checkbox class="vs-checkbox" color="primary">Seleccionar</mat-checkbox>
-                        
-                    </mat-card-subtitle>
-
-                </mat-card-header>
-
-                <mat-card-content>
+                    <mat-card-title>
+                        <div class="row">
+                            <div class="col s11 p-l-0">
+                                ¿Paciente con síntomas de infección respiratoria aguda que presente tos y/o dolor de garganta y además uno de los siguientes signos/síntomas?
+                            </div>
+                            <div class="col s1">
+                                <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta1($event)"></mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-card-title>
                     
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[0]">Malestar general</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[1]">Fiebre</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[2]">Cefalea</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[3]">Congestión Nasal</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[4]">Diarrea</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[5]">Dificultad para respirar</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[6]">Pérdida del gusto (ageusia)</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta1" [(ngModel)]="casoSospechoso[7]">Pérdida del olfato (anosmia)</mat-checkbox>
+                </mat-card-content>
+            </mat-card>
+            <br>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <div class="row">
+                            <div class="col s11 p-l-0">
+                                ¿Caso sospechoso con IRAG: Paciente con síntomas de infección respiratoria aguda grave, o  fiebre o temperatura actual >= 38°C, y además uno de los siguientes signos/síntomas?
+                            </div>
+                            <div class="col s1">
+                                <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta2($event)"></mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2" [(ngModel)]="casoSospechoso[8]">Fiebre o temperatura actual >= 38°C</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2" [(ngModel)]="casoSospechoso[9]">Tos con inicio de los últimos 10 días</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta2" [(ngModel)]="casoSospechoso[10]">Requiere hospitalización</mat-checkbox>
+                </mat-card-content>
+            </mat-card>
+            <br>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> 
+                        <div class="row">
+                            <div class="col s11 p-l-0">
+                                ¿Caso sospechoso con antecedente epidemiológico y además uno de las siguientes acciones?
+                            </div>
+                            <div class="col s1">
+                                <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta3($event)"></mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-card-title>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta3" [(ngModel)]="casoProbable[0]">Que estuvo en contacto con caso <br>probable o confirmado</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta3" [(ngModel)]="casoProbable[1]">Que se relacionó a grupo con al <br>menos un confirmado 14 días previos al <br> inicio de síntomas</mat-checkbox>
                 </mat-card-content>
 
             </mat-card>
-            
+            <br>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <div class="row">
+                            <div class="col s11 p-l-0">
+                                ¿Caso sospechoso, con imágenes de tórax, que muestra hallazgo sugestivo de Covid-19 en?
+                            </div>
+                            <div class="col s1">
+                                <mat-checkbox class="vs-checkbox" color="primary" (change)="cambioPregunta4($event)"></mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-card-title>
+
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4" [(ngModel)]="casoProbable[2]">Radiografía de tórax.</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4" [(ngModel)]="casoProbable[3]">Tomografía computarizada de tórax.</mat-checkbox>
+                    <mat-checkbox class="vs-checkbox" color="primary" [disabled]="pregunta4" [(ngModel)]="casoProbable[4]">Ecografía pulmonar</mat-checkbox>
+                </mat-card-content>
+
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title> 
+                        <div class="row">
+                            <div class="col s11 p-l-0">
+                                ¿Persona con inicio reciente de anosmia (pérdida del olfato) o  de ageustia (pérdida del gusto)?
+                            </div>
+                            <div class="col s1">
+                                <mat-checkbox class="vs-checkbox" color="primary" [(ngModel)]="casoProbable[5]"></mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                </mat-card-content>
+
+            </mat-card>
+
             <br>
             <mat-card class="card-options">
 
                 <mat-card-content>
                     <div class="send-results">
-                        <button *ngIf="!loader" mat-raised-button color="primary" (click)="enviarResultado()" [disabled]="avance < 100">ENVIAR RESULTADOS</button>
+                        <button *ngIf="!loader" mat-raised-button color="primary" (click)="enviarResultado()">ENVIAR RESULTADOS</button>
                         <mat-spinner *ngIf="loader" diameter="40"></mat-spinner>
                     </div>
                 </mat-card-content>
 
             </mat-card>
-            
+
             <br>
         </div>
     </div>

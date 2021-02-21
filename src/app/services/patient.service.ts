@@ -61,4 +61,10 @@ export class PatientService {
 
     }
 
+    buscarPorDocumento(documento): Observable<any> {
+
+        return this.http.get<any>(`${environment.apiUrl}patients/document/${documento}`);
+
+    }
+
 }

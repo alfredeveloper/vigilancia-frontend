@@ -7,7 +7,7 @@
                 </div>
                 <div *ngIf="!loader">
                     <p class="response">
-                        "{{resultados.result}}"
+                        CASO "{{resultados.result}}"
                     </p>
                     
                     <p class="name-section">
@@ -33,6 +33,8 @@
                     <p class="bussines">
                         {{resultados.bussines}}
                     </p>
+
+                    <button color="primary" mat-stroked-button (click)="volver()">Volver</button>
                 </div>
                         
             </mat-card>

@@ -1,6 +1,8 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { PatientService } from '../services/patient.service';
 import { SurveyService } from '../services/survey.service';
 
 @Component({
@@ -19,7 +21,12 @@ export class AutodiagnosisComponent implements OnInit {
   result: string;
   typeResult: number;
 
+  patient_id: any;
+
   cuestionario: any = Array(27);
+
+  casoSospechoso: any [] = [false,false,false,false,false,false,false,false,false,false,false];
+  casoProbable: any [] = [false,false,false,false,false,false];
 
   loader: boolean = false;
 
@@ -50,7 +57,8 @@ export class AutodiagnosisComponent implements OnInit {
   constructor(
     private _router: Router,
     private _surveyService: SurveyService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _patientService: PatientService
   ) { }
 
   ngDoCheck(): void {
@@ -74,6 +82,22 @@ export class AutodiagnosisComponent implements OnInit {
     
   }
 
+  buscarPaciente(f: NgForm) {
+    this._patientService.buscarPorDocumento(this.dni).subscribe(
+      response => {
+        console.log('response', response)
+        this.name = `${response.data.name} ${response.data.apaterno} ${response.data.amaterno}`;
+        this.bussines = response.data.company;
+        this.phone = response.data.telephone;
+
+        this.patient_id = response.data._id;
+      },
+      error => {
+        this.openError('Error al buscar', 'OK');
+      }
+    )
+  }
+
   cambioPregunta1(event) {
     this.pregunta1 = !event.checked
   }
@@ -90,66 +114,61 @@ export class AutodiagnosisComponent implements OnInit {
     this.pregunta4 = !event.checked
   }
   enviarResultado() {
-    this.loader = true;
-    this.cuestionario.forEach((element, key) => {
-
-      if(key >= 0 && key <= 10) {
-        if(this.result == "" || this.result == null) {
-          if (element == "1") {
-            this.result = this.respuestas[0].name;
-            this.typeResult = this.respuestas[0].id;
-          }
-        }
+    console.log('sospechoso', this.casoSospechoso)
+    console.log('probable', this.casoProbable)
+    
+    this.loader = false;
+    
+    let esSospechoso = false;
+    
+    this.casoSospechoso.forEach(element => {
+      if(element) {
+        esSospechoso = true;
       }
-
-      if(key >= 11 && key <= 16) {
-        if(this.result == "" || this.result == null) {
-          if(element == "1") {
-            this.result = this.respuestas[1].name;
-            this.typeResult = this.respuestas[1].id;
-          }
-        }
-      }
-
-      if(key >= 17 && key <= 26) {
-        if(this.result == "" || this.result == null) {
-          if(element == "1") {
-            this.result = this.respuestas[2].name;
-            this.typeResult = this.respuestas[2].id;
-          }
-        }
-      }
-
-      if(this.result == null || this.result == "") {
-        this.result = this.respuestas[3].name;
-        this.typeResult = this.respuestas[3].id;
-      }
-
     });
-
+    
+    let esProbable = false;
+    
+    this.casoProbable.forEach(element => {
+      if(element) {
+        esProbable = true;
+      }
+    });
+    
+    let result = "NINGUNO";
+    
+    if(esSospechoso && esProbable) {
+      
+      result = "SOSPECHOSO_PROBABLE";
+      
+    } else {
+      if(esSospechoso) {
+        result = "SOSPECHOSO";
+      } 
+      
+      if(esProbable) {
+        result = "PROBABLE";
+      }
+    }
+    
     const resultados = {
       name: this.name,
       phone: this.phone,
       dni: this.dni,
       bussines: this.bussines,
       cuestionario: this.cuestionario,
-      result: this.result
+      result: result
     }
-
+    
     console.log('resultados', resultados);
-
+    
     let params = {
       type: "AUTODIAGNOSTICO",
-      name: this.name,
-      diagnosis: this.result,
-      phone: this.phone,
-      dni: this.dni,
-      company: this.bussines,
-      typeResult: this.typeResult,
-      results: JSON.stringify({cuestionario: this.cuestionario})
+      result: result,
+      patient: this.patient_id,
     }
     console.log('params', params)
-
+    
     this._surveyService.saveAutodiagnoses(params).subscribe(
       response => {
         this.loader = false;

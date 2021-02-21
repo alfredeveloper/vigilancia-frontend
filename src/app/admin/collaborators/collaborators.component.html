@@ -49,7 +49,7 @@
         <!-- <td mat-cell *matCellDef="let row"> {{row.progress}}% </td> -->
         <td mat-cell *matCellDef="let row"> 
         
-        <h4 mat-line>{{row.dni}}</h4>
+        <h4 mat-line>{{row.document}}</h4>
         
         </td>
     </ng-container>
@@ -70,7 +70,7 @@
     
     <ng-container matColumnDef="procedencia">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Procedencia Autodiagnostico </th>
-        <td mat-cell *matCellDef="let row"> {{row.origin}} </td>
+        <td mat-cell *matCellDef="let row"> {{(row.origin)? row.origin: "Sin Registrar"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="control">

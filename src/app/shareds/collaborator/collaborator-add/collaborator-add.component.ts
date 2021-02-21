@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Follow } from 'src/app/models/follow';
 import { Patient } from 'src/app/models/patient';
 import { PatientService } from 'src/app/services/patient.service';
+import { TypeDocumentService } from 'src/app/services/type-document.service';
 import { SuccessComponent } from '../../dialog/success/success.component';
 
 export class AppDateAdapter extends NativeDateAdapter {
@@ -49,31 +50,44 @@ export class CollaboratorAddComponent implements OnInit {
   patient: Patient;
   follow: Follow;
 
-  departamentos: Array<any> = []
-  provincias: Array<any> = []
-  distritos: Array<any> = []
+  departamentos: Array<any> = [];
+  provincias: Array<any> = [];
+  distritos: Array<any> = [];
+
+  tipos: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _patientService: PatientService,
     private _snackBar: MatSnackBar,
+    private _typeDocumentService: TypeDocumentService,
     public dialog: MatDialog
   ) { 
-    this.patient = new Patient('','','','','','','','','','',new Date(),'','','','','','','');
+    this.patient = new Patient('','','','','','','','','','','',new Date(),'','',null,null,null,'','');
     this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {
     this.listarDepartamentos();
+    this.obtenerTiposDeDocumento();
+  }
+
+  obtenerTiposDeDocumento() {
+    this._typeDocumentService.getTiposDeDocumentos().subscribe(
+      response => {
+        this.tipos = response.data;
+      },
+      error => {
+        this.openError('Error al obtener tipos', 'OK')
+      }
+    )
   }
 
   registrarColaborador(f: NgForm): void {
 
-    console.log('this.patient', this.patient);
-    console.log('this.follow', this.follow);
     let json = this.extend(this.patient, this.follow);
-    console.log('JSON', json);
+    console.log('json', json);
     this._patientService.registerPatient(json).subscribe(
       response => {
         console.log('response', response);
@@ -111,9 +125,6 @@ export class CollaboratorAddComponent implements OnInit {
     )
   }
 
-  listarProvincias() {
-  }
-
   seleccionarProvincia() {
     this._patientService.obtenerDistritos(this.patient.provincia).subscribe(
       response => {
@@ -123,9 +134,6 @@ export class CollaboratorAddComponent implements OnInit {
         this.openError('Error al obtener distritos', 'OK');
       }
     )
-  }
-
-  listarDistritos() {
   }
 
   extend(dest, src) { 

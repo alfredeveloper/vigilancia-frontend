@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-results',
@@ -10,7 +11,9 @@ export class ResultsComponent implements OnInit {
   resultados: any;
   loader: boolean = true;
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
     this.obtenerResultados();
@@ -24,6 +27,10 @@ export class ResultsComponent implements OnInit {
 
     this.resultados = JSON.parse(localStorage.getItem('resultados'));
 
+  }
+
+  volver() {
+    this._router.navigate(['/autodiagnostico']);
   }
 
 }
