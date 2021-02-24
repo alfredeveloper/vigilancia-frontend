@@ -31,34 +31,34 @@
                 <!-- <td mat-cell *matCellDef="let row"> {{row.progress}}% </td> -->
                 <td mat-cell *matCellDef="let row"> 
                     
-                    {{row.temperature}}
+                    {{row.temperatura}}
                     
                 </td>
             </ng-container>
             
             <!-- ID Column -->
             <ng-container matColumnDef="escalofrios">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Escalofrio </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> PA </th>
                 <!-- <td mat-cell *matCellDef="let row"> {{row.id}} </td> -->
                 <td mat-cell *matCellDef="let row"> 
-                    {{row.chills_sweating}}
+                    {{row.pa}}
                 </td>
             </ng-container>
             <!-- Name Column -->
             <ng-container matColumnDef="tos">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tos </th>
-                <td mat-cell *matCellDef="let row"> {{row.cough}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FC </th>
+                <td mat-cell *matCellDef="let row"> {{row.fc}} </td>
             </ng-container>
             
             <ng-container matColumnDef="dolor_garganta">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor de Garganta </th>
-                <td mat-cell *matCellDef="let row"> {{row.sore_throat}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FR </th>
+                <td mat-cell *matCellDef="let row"> {{row.fr}} </td>
             </ng-container>
             
             <ng-container matColumnDef="dolor_pecho">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor de Pecho </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pulsoxiometria </th>
                 <td mat-cell *matCellDef="let row"> 
-                    {{row.chest_pain}}
+                    {{row.pulsioximetria}}
                 </td>
             </ng-container>
 

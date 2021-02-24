@@ -76,6 +76,7 @@ export class CollaboratorAddComponent implements OnInit {
   obtenerTiposDeDocumento() {
     this._typeDocumentService.getTiposDeDocumentos().subscribe(
       response => {
+        console.log('tipos', response)
         this.tipos = response.data;
       },
       error => {
@@ -88,6 +89,7 @@ export class CollaboratorAddComponent implements OnInit {
 
     let json = this.extend(this.patient, this.follow);
     console.log('json', json);
+
     this._patientService.registerPatient(json).subscribe(
       response => {
         console.log('response', response);

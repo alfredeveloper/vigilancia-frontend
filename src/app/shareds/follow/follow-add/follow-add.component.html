@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col s3">
                 <mat-form-field>
-                    <mat-label>Tipo de documento</mat-label>
-                    <mat-select name="type_document" value="DNI">
-                        <mat-option value="DNI">
-                            DNI
+                    <mat-label>Tipo de Documento</mat-label>
+                    <mat-select name="tipo_documento" [(ngModel)]="patient.type_document" required disabled>
+                        <mat-option *ngFor="let tipo of tipos" [value]="tipo._id">
+                            {{tipo.name}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -18,28 +18,28 @@
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Nro. de Documento</mat-label>
-                    <input matInput placeholder="Nro. de Documento" type="number" name="numdoc" value="93939393">
+                    <input matInput placeholder="Nro. de Documento" type="number" name="numdoc" [(ngModel)]="patient.document" disabled>
                 </mat-form-field>
             </div>
 
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Nombres</mat-label>
-                    <input matInput placeholder="Nombres" type="text" name="name" value="Alfredo">
+                    <input matInput placeholder="Nombres" type="text" name="name" [(ngModel)]="patient.name" disabled>
                 </mat-form-field>
             </div>
 
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Apellidos</mat-label>
-                    <input matInput placeholder="Apellidos" type="text" name="lastname" value="Yupanqui Alarcon">
+                    <input matInput placeholder="Apellidos" type="text" name="lastname" [(ngModel)]="patient.apaterno" disabled>
                 </mat-form-field>
             </div>
             
             <div class="col s3">
                 <mat-form-field>
                     <mat-label>Procedencia</mat-label>
-                    <mat-select name="type_document" value="DNI">
+                    <mat-select name="type_document" value="origin" [(ngModel)]="patient.origin" disabled>
                         <mat-option value="DNI">
                             Sospechosa
                         </mat-option>
@@ -50,7 +50,7 @@
             <div class="col s3">
                 <mat-form-field>
                     <mat-label>Fecha</mat-label>
-                    <input matInput [matDatepicker]="picker" placeholder="Fecha" required name="date">
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha" required name="birth_date" [(ngModel)]="patient.birth_date" disabled>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -67,38 +67,44 @@
             <div class="col s12">
                 <h3>1. Funciones vitales</h3>
             </div>
+
+            <div class="col s3">
+                <p>
+                    <mat-checkbox color="primary" class="example-margin" name="cough" [(ngModel)]="follow.seguimiento_pot">Seguimiento P o T</mat-checkbox>
+                </p>
+            </div>
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>PA</mat-label>
-                    <input matInput placeholder="PA" type="number" name="pa">
+                    <input matInput placeholder="PA" type="number" name="pa" [(ngModel)]="follow.pa">
                 </mat-form-field>   
             </div>
     
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>FC</mat-label>
-                    <input matInput placeholder="FC" type="number" name="fc">
+                    <input matInput placeholder="FC" type="number" name="fc" [(ngModel)]="follow.fc">
                 </mat-form-field>   
             </div>
     
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>FR</mat-label>
-                    <input matInput placeholder="FR" type="number" name="fr">
+                    <input matInput placeholder="FR" type="number" name="fr" [(ngModel)]="follow.fr">
                 </mat-form-field>   
             </div>
     
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Temperatura</mat-label>
-                    <input matInput placeholder="Temperatura" type="number" name="temperature">
+                    <input matInput placeholder="Temperatura" type="number" name="temperature" [(ngModel)]="follow.temperatura">
                 </mat-form-field>   
             </div>
     
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Pulsioximetria</mat-label>
-                    <input matInput placeholder="Pulsioximetria" type="number" name="pulso">
+                    <input matInput placeholder="Pulsioximetria" type="number" name="pulso" [(ngModel)]="follow.pulsioximetria">
                 </mat-form-field>   
             </div>
         </div>
@@ -109,92 +115,92 @@
             </div>
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Tos</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="tos" [(ngModel)]="follow.tos">Tos</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor de garganta</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="dolor_garganta" [(ngModel)]="follow.dolor_garganta">Dolor de garganta</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Congestion nasal</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="congestion_nasal" [(ngModel)]="follow.congestion_nasal">Congestion nasal</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Fiebre</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="fiebre" [(ngModel)]="follow.fiebre">Fiebre</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Malestar general</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="malestar_general" [(ngModel)]="follow.malestar_general">Malestar general</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Dificultad respiratoria</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="dificultad_respiratoria" [(ngModel)]="follow.dificultad_respiratoria">Dificultad respiratoria</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Diarrea</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="diarrea" [(ngModel)]="follow.diarrea">Diarrea</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Nausea / Vomito</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="nausea_vomito" [(ngModel)]="follow.nausea_vomito">Nausea / Vomito</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Cefalea</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="cefalea" [(ngModel)]="follow.cefalea">Cefalea</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Irritabilidad / Confusión</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="irritabilidad_confusion" [(ngModel)]="follow.irritabilidad_confusion">Irritabilidad / Confusión</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor muscular</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="dolor_muscular" [(ngModel)]="follow.dolor_muscular">Dolor muscular</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor abdominal</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="dolor_abdominal" [(ngModel)]="follow.dolor_abdominal">Dolor abdominal</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor de pecho</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="dolor_pecho" [(ngModel)]="follow.dolor_pecho">Dolor de pecho</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s3">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Dolor en articulaciones</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="dolor_articulaciones" [(ngModel)]="follow.dolor_articulaciones">Dolor en articulaciones</mat-checkbox>
                 </p>
             </div>
 
             <div class="col s6">
                 <mat-form-field class="example-full-width">
                     <mat-label>Otro (especificar)</mat-label>
-                    <input matInput placeholder="Otro (especificar)" type="text" name="pulso">
+                    <input matInput placeholder="Otro (especificar)" type="text" name="otro_signo_sintoma" [(ngModel)]="follow.otro_signo_sintoma">
                 </mat-form-field>   
             </div>
         </div>
@@ -205,22 +211,22 @@
             </div>
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Disnea</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="disnea" [(ngModel)]="follow.disnea">Disnea</mat-checkbox>
                 </p>
             </div>  
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Taquipnea (>= 22 pm)</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="taquipnea" [(ngModel)]="follow.taquipnea">Taquipnea (>= 22 pm)</mat-checkbox>
                 </p>
             </div> 
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Saturación de oxígeno < 92%</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="saturacion_oxigeno" [(ngModel)]="follow.saturacion_oxigeno">Saturación de oxígeno < 92%</mat-checkbox>
                 </p>
             </div>   
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Alteración de la conciencia</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="alteracion_conciencia" [(ngModel)]="follow.alteracion_conciencia">Alteración de la conciencia</mat-checkbox>
                 </p>
             </div>      
         </div>
@@ -231,23 +237,23 @@
             </div>
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Fosfato de cloriquina</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="fosfato_cloroquina" [(ngModel)]="follow.fosfato_cloroquina">Fosfato de cloriquina</mat-checkbox>
                 </p>
             </div>  
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Hidorxicioroquina</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="hidorxicloroquina" [(ngModel)]="follow.hidorxicloroquina">Hidorxicioroquina</mat-checkbox>
                 </p>
             </div> 
             <div class="col s4">
                 <p>
-                    <mat-checkbox color="primary" class="example-margin" name="cough">Hidorxicioroquina + Azitromicina</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin" name="azitromicina" [(ngModel)]="follow.azitromicina">Hidorxicioroquina + Azitromicina</mat-checkbox>
                 </p>
             </div>   
-            <div class="col s4">
+            <div class="col s12">
                 <mat-form-field class="example-full-width">
                     <mat-label>Otro (especificar)</mat-label>
-                    <input matInput placeholder="Otro (especificar)" type="text" name="pulso">
+                    <input matInput placeholder="Otro (especificar)" type="text" name="otro_tratamiento_especifico" [(ngModel)]="follow.otro_tratamiento_especifico">
                 </mat-form-field>   
             </div>
         </div>
@@ -256,16 +262,16 @@
             <div class="col s12">
                 <h3>5. Tratamiento Antimicrobiano</h3>
             </div>
-            <div class="col s3">
+            <div class="col s6">
                 <mat-form-field class="example-full-width">
                     <mat-label>Antibiótico (especificar)</mat-label>
-                    <input matInput placeholder="Antibiótico (especificar)" type="text" name="antibiotico">
+                    <input matInput placeholder="Antibiótico (especificar)" type="text" name="antibiotico" [(ngModel)]="follow.antibiotico">
                 </mat-form-field>   
             </div>  
-            <div class="col s3">
+            <div class="col s6">
                 <mat-form-field class="example-full-width">
                     <mat-label>Antiviral (especificar)</mat-label>
-                    <input matInput placeholder="Antiviral (especificar)" type="text" name="antiviral">
+                    <input matInput placeholder="Antiviral (especificar)" type="text" name="antiviral" [(ngModel)]="follow.antiviral">
                 </mat-form-field>   
             </div> 
         </div>
@@ -277,13 +283,13 @@
             <div class="col s3">
                 <mat-form-field class="example-full-width">
                     <mat-label>Enoxaparima mg</mat-label>
-                    <input matInput placeholder="Enoxaparima mg" type="text" name="antibiotico">
+                    <input matInput placeholder="Enoxaparima mg" type="text" name="onoxapirina" [(ngModel)]="follow.onoxapirina">
                 </mat-form-field>   
             </div>  
-            <div class="col s3">
+            <div class="col s9">
                 <mat-form-field class="example-full-width">
                     <mat-label>Otro (especificar)</mat-label>
-                    <input matInput placeholder="Otro (especificar)" type="text" name="antiviral">
+                    <input matInput placeholder="Otro (especificar)" type="text" name="otro_anticoagulatorio" [(ngModel)]="follow.otro_anticoagulatorio">
                 </mat-form-field>   
             </div> 
         </div>
@@ -292,10 +298,10 @@
             <div class="col s12">
                 <h3>7. Otra especificación</h3>
             </div>
-            <div class="col s3">
+            <div class="col s12">
                 <mat-form-field class="example-full-width">
                     <mat-label>Especificar medicamento</mat-label>
-                    <input matInput placeholder="Especificar medicamento" type="text" name="antibiotico">
+                    <input matInput placeholder="Especificar medicamento" type="text" name="especificar_medicamento" [(ngModel)]="follow.especificar_medicamento">
                 </mat-form-field>   
             </div>  
         </div>
@@ -304,10 +310,10 @@
             <div class="col s12">
                 <h3>Evolucion</h3>
             </div>
-            <div class="col s3">
+            <div class="col s6">
                 <mat-form-field>
                     <mat-label>Estado</mat-label>
-                    <mat-select name="type_document" value="DNI">
+                    <mat-select name="estado_evolucion" [(ngModel)]="follow.estado_evolucion">
                         <mat-option value="L">
                             Leve
                         </mat-option>
@@ -326,10 +332,10 @@
             <div class="col s12">
                 <h3>Condicion de egreso</h3>
             </div>
-            <div class="col s3">
+            <div class="col s6">
                 <mat-form-field>
                     <mat-label>Condición de egreso</mat-label>
-                    <mat-select name="type_document" value="DNI">
+                    <mat-select name="condicion_egreso" [(ngModel)]="follow.condicion_egreso">
                         <mat-option value="A">
                             Recuperado
                         </mat-option>
@@ -361,7 +367,7 @@
     </div>
     
     <div mat-dialog-actions class="bottom-sheet">
-        <button mat-button (click)="cancelar()">Cancelar</button>
+        <button mat-button (click)="cancelar()" type="button">Cancelar</button>
         <button mat-stroked-button cdkFocusInitial type="submit" color="primary">Registrar</button>
     </div>
 
