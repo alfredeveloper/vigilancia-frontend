@@ -63,7 +63,7 @@ export class FollowAddComponent implements OnInit {
         this.patient.apaterno = response.data.apaterno;
         this.patient.amaterno = response.data.amaterno;
         this.patient.origin = response.data.origin;
-        this.patient.birth_date = response.data.birth_date;
+        this.patient.birth_date = new Date();
       },
       error => {
         console.log('error', error)

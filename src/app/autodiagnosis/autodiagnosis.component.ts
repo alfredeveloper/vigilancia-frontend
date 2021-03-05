@@ -27,6 +27,7 @@ export class AutodiagnosisComponent implements OnInit {
 
   casoSospechoso: any [] = [false,false,false,false,false,false,false,false,false,false,false];
   casoProbable: any [] = [false,false,false,false,false,false];
+  casoDescartado = false;
 
   loader: boolean = false;
 
@@ -113,7 +114,7 @@ export class AutodiagnosisComponent implements OnInit {
   cambioPregunta4(event) {
     this.pregunta4 = !event.checked
   }
-  enviarResultado() {
+  enviarResultado(f: NgForm) {
     console.log('sospechoso', this.casoSospechoso)
     console.log('probable', this.casoProbable)
     
@@ -135,7 +136,8 @@ export class AutodiagnosisComponent implements OnInit {
       }
     });
     
-    let result = "NINGUNO";
+    let result = "SIN RESULTADOS";
+    let confirmation = "";
     
     if(esSospechoso && esProbable) {
       
@@ -144,11 +146,17 @@ export class AutodiagnosisComponent implements OnInit {
     } else {
       if(esSospechoso) {
         result = "SOSPECHOSO";
+        confirmation = "CONFIRMADO_SINTOMATICO";
       } 
       
       if(esProbable) {
         result = "PROBABLE";
+        confirmation = "CONFIRMADO_ASINTOMATICO";
       }
+    }
+
+    if(this.casoDescartado) {
+      confirmation = "DESCARTADO";
     }
     
     const resultados = {
@@ -157,7 +165,8 @@ export class AutodiagnosisComponent implements OnInit {
       dni: this.dni,
       bussines: this.bussines,
       cuestionario: this.cuestionario,
-      result: result
+      result: result,
+      confirmation: confirmation
     }
     
     console.log('resultados', resultados);
@@ -183,6 +192,162 @@ export class AutodiagnosisComponent implements OnInit {
       }
     )
     
+    
+  }
+
+  seleccionar(value) {
+    console.log('value', value)
+    if(value == "1a") {
+      if(this.pregunta1) {
+        this.pregunta1 = !this.pregunta1;
+        this.pregunta2 = true;
+        this.pregunta3 = true;
+        this.pregunta4 = true;
+
+        this.casoSospechoso[8] = false;
+        this.casoSospechoso[9] = false;
+        this.casoSospechoso[10] = false;
+
+        this.casoProbable[0] = false;
+        this.casoProbable[1] = false;
+        this.casoProbable[2] = false;
+        this.casoProbable[3] = false;
+        this.casoProbable[4] = false;
+        this.casoProbable[5] = false;
+
+        this.casoDescartado = false;
+      }
+    } else if(value =="1b") {
+      if(this.pregunta2){
+        this.pregunta1 = true;
+        this.pregunta2 = !this.pregunta2;
+        this.pregunta3 = true;
+        this.pregunta4 = true;
+        
+        this.casoSospechoso[0] = false;
+        this.casoSospechoso[1] = false;
+        this.casoSospechoso[2] = false;
+        this.casoSospechoso[3] = false;
+        this.casoSospechoso[4] = false;
+        this.casoSospechoso[5] = false;
+        this.casoSospechoso[6] = false;
+        this.casoSospechoso[7] = false;
+        
+        this.casoProbable[0] = false;
+        this.casoProbable[1] = false;
+        this.casoProbable[2] = false;
+        this.casoProbable[3] = false;
+        this.casoProbable[4] = false;
+        this.casoProbable[5] = false;
+
+        this.casoDescartado = false;
+      }
+    } else if(value =="2a") {
+      if(this.pregunta3) {
+        this.pregunta1 = true;
+        this.pregunta2 = true;
+        this.pregunta3 = !this.pregunta3;
+        this.pregunta4 = true;
+
+        this.casoSospechoso[0] = false;
+        this.casoSospechoso[1] = false;
+        this.casoSospechoso[2] = false;
+        this.casoSospechoso[3] = false;
+        this.casoSospechoso[4] = false;
+        this.casoSospechoso[5] = false;
+        this.casoSospechoso[6] = false;
+        this.casoSospechoso[7] = false;
+        this.casoSospechoso[8] = false;
+        this.casoSospechoso[9] = false;
+        this.casoSospechoso[10] = false;
+
+        this.casoProbable[2] = false;
+        this.casoProbable[3] = false;
+        this.casoProbable[4] = false;
+        this.casoProbable[5] = false;
+        
+        this.casoDescartado = false;
+      }
+    } else if(value =="2b") {
+      if(this.pregunta4) {
+        this.pregunta1 = true;
+        this.pregunta2 = true;
+        this.pregunta3 = true;
+        this.pregunta4 = !this.pregunta4;
+
+        this.casoSospechoso[0] = false;
+        this.casoSospechoso[1] = false;
+        this.casoSospechoso[2] = false;
+        this.casoSospechoso[3] = false;
+        this.casoSospechoso[4] = false;
+        this.casoSospechoso[5] = false;
+        this.casoSospechoso[6] = false;
+        this.casoSospechoso[7] = false;
+        this.casoSospechoso[8] = false;
+        this.casoSospechoso[9] = false;
+        this.casoSospechoso[10] = false;
+
+        this.casoProbable[0] = false;
+        this.casoProbable[1] = false;
+        this.casoProbable[5] = false;
+        
+        this.casoDescartado = false;
+      }
+    } else if(value =="2c") {
+      this.pregunta1 = true;
+      this.pregunta2 = true;
+      this.pregunta3 = true;
+      this.pregunta4 = true;
+
+      this.casoProbable[5] = true;
+
+      this.casoSospechoso[0] = false;
+      this.casoSospechoso[1] = false;
+      this.casoSospechoso[2] = false;
+      this.casoSospechoso[3] = false;
+      this.casoSospechoso[4] = false;
+      this.casoSospechoso[5] = false;
+      this.casoSospechoso[6] = false;
+      this.casoSospechoso[7] = false;
+      this.casoSospechoso[8] = false;
+      this.casoSospechoso[9] = false;
+      this.casoSospechoso[10] = false;
+
+      this.casoProbable[0] = false;
+      this.casoProbable[1] = false;
+      this.casoProbable[2] = false;
+      this.casoProbable[3] = false;
+      this.casoProbable[4] = false;
+      
+      this.casoDescartado = false;
+    } else if(value == "3a") {
+
+      this.pregunta1 = true;
+      this.pregunta2 = true;
+      this.pregunta3 = true;
+      this.pregunta4 = true;
+
+      this.casoDescartado = true;
+
+      this.casoSospechoso[0] = false;
+      this.casoSospechoso[1] = false;
+      this.casoSospechoso[2] = false;
+      this.casoSospechoso[3] = false;
+      this.casoSospechoso[4] = false;
+      this.casoSospechoso[5] = false;
+      this.casoSospechoso[6] = false;
+      this.casoSospechoso[7] = false;
+      this.casoSospechoso[8] = false;
+      this.casoSospechoso[9] = false;
+      this.casoSospechoso[10] = false;
+
+      this.casoProbable[0] = false;
+      this.casoProbable[1] = false;
+      this.casoProbable[2] = false;
+      this.casoProbable[3] = false;
+      this.casoProbable[4] = false;
+      this.casoProbable[5] = false;
+    }
     
   }
 
