@@ -34,7 +34,7 @@ export class FollowEditComponent implements OnInit {
   ) { 
     this.patient = new Patient('','','','','','','','','','','',new Date(),'','',null,null,null,'','');
 
-    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '');
+    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date());
   }
 
   ngOnInit(): void {

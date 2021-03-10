@@ -38,5 +38,6 @@ export class Follow {
         public estado_evolucion: string,
         public condicion_egreso: string,
         public patient: string,
+        public date: Date
     ){}
 }
