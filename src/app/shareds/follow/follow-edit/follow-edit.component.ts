@@ -9,6 +9,7 @@ import { FollowService } from 'src/app/services/follow.service';
 import { PatientService } from 'src/app/services/patient.service';
 import { TypeDocumentService } from 'src/app/services/type-document.service';
 import { SuccessComponent } from '../../dialog/success/success.component';
+import { ConfirmationCaseComponent } from '../confirmation-case/confirmation-case.component';
 
 @Component({
   selector: 'app-follow-edit',
@@ -34,11 +35,12 @@ export class FollowEditComponent implements OnInit {
   ) { 
     this.patient = new Patient('','','','','','','','','','','',new Date(),'','',null,null,null,'','');
 
-    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date());
+    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date(), '', null);
   }
 
   ngOnInit(): void {
     console.log('data', this.data)
+
     this.obtenerTiposDeDocumento();
 
   }
@@ -75,8 +77,26 @@ export class FollowEditComponent implements OnInit {
 
   actualizarSeguimiento(f: NgForm) {
 
-    console.log('DATA TO UPDATE', this.data);
+    if( this.data.follow.confirmation_code == 1 || this.data.follow.confirmation_code == 2 || this.data.follow.confirmation_code == 3 ) {
+      
+      this.data.follow.confirmation = "CONFIRMADO_SINTOMATICO";
+      
+    } else if(this.data.follow.confirmation_code == 4){
+      
+      this.data.follow.confirmation = "CONFIRMADO_ASINTOMATICO";
+      
+    } else if(this.data.follow.confirmation_code == 5){
+      
+      this.data.follow.confirmation = "DESCARTADO";
+      
+    } else {
+      
+      this.data.follow.confirmation = "SIN_CONFIRMAR";
+      
+    }
 
+    console.log('DATA TO UPDATE', this.data);
+    
     this._followService.updateFollow(this.data.follow._id, this.data.follow).subscribe(
       response => {
         console.log('RESPONSE', response);
@@ -87,6 +107,18 @@ export class FollowEditComponent implements OnInit {
         console.log('ERROR', error)
       }
     )
+  }
+
+  abrirConfirmacion() {
+    const dialogRef = this.dialog.open(ConfirmationCaseComponent, {
+      width: '600px',
+      data: this.data.follow.confirmation_code
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.data.follow.confirmation_code = result;
+      console.log(this.data.follow.confirmation_code)
+    })
   }
 
   cancelar() {

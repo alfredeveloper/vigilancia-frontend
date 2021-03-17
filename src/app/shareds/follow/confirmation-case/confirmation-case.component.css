@@ -1,0 +1,4 @@
+mat-radio-button /deep/ .mat-radio-label {
+    white-space: normal !important;
+    margin-bottom: 10px !important;
+}

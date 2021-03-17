@@ -33,7 +33,7 @@ export class FollowsComponent implements OnInit {
     private _followService: FollowService,
     private _bottomSheet: MatBottomSheet
   ) { 
-    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date());
+    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date(),'', null);
   } 
 
   ngOnInit(): void {

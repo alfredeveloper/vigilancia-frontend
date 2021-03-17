@@ -38,6 +38,8 @@ export class Follow {
         public estado_evolucion: string,
         public condicion_egreso: string,
         public patient: string,
-        public date: Date
+        public date: Date,
+        public confirmation: any,
+        public confirmation_code: any,
     ){}
 }

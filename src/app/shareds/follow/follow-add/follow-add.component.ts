@@ -9,6 +9,7 @@ import { FollowService } from 'src/app/services/follow.service';
 import { PatientService } from 'src/app/services/patient.service';
 import { TypeDocumentService } from 'src/app/services/type-document.service';
 import { SuccessComponent } from '../../dialog/success/success.component';
+import { ConfirmationCaseComponent } from '../confirmation-case/confirmation-case.component';
 
 @Component({
   selector: 'app-follow-add',
@@ -33,7 +34,7 @@ export class FollowAddComponent implements OnInit {
   ) { 
     this.patient = new Patient('','','','','','','','','','','',new Date(),'','',null,null,null,'','');
 
-    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date());
+    this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date(), '', null);
   }
 
   ngOnInit(): void {
@@ -73,8 +74,25 @@ export class FollowAddComponent implements OnInit {
 
   registrarSeguimiento(f:NgForm) {
     this.follow.patient = this.data.patient_id;
+    
+    if( this.follow.confirmation_code == 1 || this.follow.confirmation_code == 2 || this.follow.confirmation_code == 3 ) {
+      
+      this.follow.confirmation = "CONFIRMADO_SINTOMATICO";
+      
+    } else if(this.follow.confirmation_code == 4){
+      
+      this.follow.confirmation = "CONFIRMADO_ASINTOMATICO";
+      
+    } else if(this.follow.confirmation_code == 5){
+      
+      this.follow.confirmation = "DESCARTADO";
+      
+    } else {
+      
+      this.follow.confirmation = "SIN_CONFIRMAR";
+      
+    }
     console.log('SEGUIMIENTO', this.follow);
-
     this._followService.registerFollow(this.follow).subscribe(
       response => {
         console.log('RESPONSE', response)
@@ -89,6 +107,19 @@ export class FollowAddComponent implements OnInit {
   cancelar() {
     this._bottomSheetRef.dismiss();
   }
+
+  abrirConfirmacion() {
+    const dialogRef = this.dialog.open(ConfirmationCaseComponent, {
+      width: '600px',
+      data: this.follow.confirmation_code
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.follow.confirmation_code = result
+      console.log(this.follow.confirmation)
+    })
+  }
+
 
   openError(message, action) {
     this._snackBar.open(message, action, {

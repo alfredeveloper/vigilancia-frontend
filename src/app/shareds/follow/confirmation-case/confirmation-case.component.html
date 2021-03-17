@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Confirmación de Casos Según Resolución Ministerial MINSA 972</h1>
+
+<mat-radio-group class="rb-option" aria-label="Select an option" [(ngModel)]="result">
+    <h3>1. Caso Confirmado Sintomático de COVID 19.</h3>
+    <mat-radio-button color="primary" value="1"><b>a.</b> ¿Caso sospechoso o probable con confirmación de laboratorio de infección por COVID 19 (Prueba Molecular)?</mat-radio-button>
+    <br>
+    <mat-radio-button color="primary" value="2"><b>b.</b>¿Caso sospechoso o probable con prueba antigénica positiva?</mat-radio-button>
+    <br>
+    <mat-radio-button color="primary" value="3"><b>c.</b>¿Caso sospechoso o probable con prueba serológica reactiva a IgM 0 IgM/IgG?</mat-radio-button>
+    <h3>2. Caso De Infección Asintomática de COVID 19.</h3>
+    <mat-radio-button color="primary" value="4">Toda persona asintomática identificada a través de la estrategia de búsqueda activa que no presenta signos ni síntomas compatibles con COVID 19, pero con resultados positivo de alguna de las pruebas.</mat-radio-button>
+    <h3>3. Caso Descartado</h3>
+    <mat-radio-button color="primary" value="5">No cumple ninguna de las anteriores</mat-radio-button>
+</mat-radio-group>
+
+<div mat-dialog-actions>
+    <button mat-button cdkFocusInitial (click)="registrarConfirmacion()" color="primary">Registrar</button>
+</div>
