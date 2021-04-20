@@ -94,7 +94,7 @@ export class CollaboratorsComponent implements OnInit {
 
   verSeguimientos(colaborador) {
     const dialogRef = this.dialog.open(FollowsComponent, {
-      width: '700px',
+      width: '100%',
       data: colaborador,
       disableClose: true
     })

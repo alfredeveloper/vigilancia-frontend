@@ -64,7 +64,7 @@ export class CollaboratorAddComponent implements OnInit {
     private _typeDocumentService: TypeDocumentService,
     public dialog: MatDialog
   ) { 
-    this.patient = new Patient('','','','','','','','','','','',new Date(),'','',null,null,null,'','');
+    this.patient = new Patient('','','','','','','','','','','',new Date(),'','',new Date(),null,null,'','');
     this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '',new Date(), '', null);
   }
 

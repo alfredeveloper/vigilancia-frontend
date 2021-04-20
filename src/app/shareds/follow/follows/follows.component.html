@@ -2,6 +2,36 @@
 
 <div class="container">
     <div class="row">
+        <div class="col s12 m3">
+            <mat-form-field>
+                <mat-label>Tipo de documento</mat-label>
+                <mat-select [(ngModel)]="tipo" name="tipo" disabled>
+                    <mat-option *ngFor="let t of tipos" [value]="t._id">
+                        {{t.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col s12 m3">
+            <mat-form-field> 
+                <mat-label>Nro. Documento</mat-label>
+                <input matInput placeholder="Nro. Documento" [(ngModel)]="documento" name="documento" disabled>
+            </mat-form-field>
+        </div>
+        <div class="col s12 m3">
+            <mat-form-field> 
+                <mat-label>Nombres</mat-label>
+                <input matInput placeholder="Nombres" [(ngModel)]="nombres" name="nombres" disabled>
+            </mat-form-field>
+        </div>
+        <div class="col s12 m3">
+            <mat-form-field> 
+                <mat-label>Apellidos</mat-label>
+                <input matInput placeholder="Apellidos" [(ngModel)]="apellidos" name="apellidos" disabled>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
 
         <div style="float: right; margin-top: 13px;">
             <button type="button" (click)="agregarSeguimiento()" mat-stroked-button color="primary">AGREGAR SEGUIMIENTO</button>
@@ -10,9 +40,9 @@
         <div>
             <div style="background-color: white; width: auto; display: inline-block;">
                 <mat-form-field appearance="outline" style="margin: 0px; padding: 0px;"> 
-                <mat-label>Búsqueda</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" style="background-color: white;">
-                <mat-icon matSuffix>search</mat-icon>
+                    <mat-label>Búsqueda</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" style="background-color: white;">
+                    <mat-icon matSuffix>search</mat-icon>
         
                 </mat-form-field>
                 
@@ -23,54 +53,14 @@
             </div>
         </div>
 
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z4">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z4 overflow-x">
             
-            <!-- Progress Column -->
-            <ng-container matColumnDef="temperatura">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Temperatura </th>
-                <!-- <td mat-cell *matCellDef="let row"> {{row.progress}}% </td> -->
-                <td mat-cell *matCellDef="let row"> 
-                    
-                    {{row.temperatura}}
-                    
-                </td>
+            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; let i = index">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{(i == 0)? column : column | date: 'dd/MM/yyyy, h:mm a' }} </th>
+                <td mat-cell *matCellDef="let element"> {{element[i]}} </td>
             </ng-container>
             
-            <!-- ID Column -->
-            <ng-container matColumnDef="escalofrios">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> PA </th>
-                <!-- <td mat-cell *matCellDef="let row"> {{row.id}} </td> -->
-                <td mat-cell *matCellDef="let row"> 
-                    {{row.pa}}
-                </td>
-            </ng-container>
-            <!-- Name Column -->
-            <ng-container matColumnDef="tos">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> FC </th>
-                <td mat-cell *matCellDef="let row"> {{row.fc}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="dolor_garganta">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> FR </th>
-                <td mat-cell *matCellDef="let row"> {{row.fr}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="dolor_pecho">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pulsoxiometria </th>
-                <td mat-cell *matCellDef="let row"> 
-                    {{row.pulsioximetria}}
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                <td mat-cell *matCellDef="let row">  
-                    {{row.date | date}}
-                </td>
-            </ng-container>
-            
-            <!-- Color Column -->
-            <ng-container matColumnDef="accion">
+            <!-- <ng-container matColumnDef="accion">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10px;"> Accion </th>
                 <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
                     <button mat-mini-fab color="primary" (click)="editarSeguimiento(row)" aria-label="Example icon button with a delete icon">
@@ -78,7 +68,7 @@
                     </button>
                     
                 </td>
-            </ng-container>
+            </ng-container> -->
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -88,12 +78,12 @@
             </tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z4"></mat-paginator>
+        <mat-paginator [pageSize]="40" [pageSizeOptions]="[40]" class="mat-elevation-z4"></mat-paginator>
     
     </div>
 </div>
 
 <div mat-dialog-actions>
-    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button (click)="cancelar()">Cancelar</button>
 </div>
 

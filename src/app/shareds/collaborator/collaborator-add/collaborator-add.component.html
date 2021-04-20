@@ -161,6 +161,9 @@
                 <mat-form-field>
                     <mat-label>Confirmación del caso</mat-label>
                     <mat-select disabled name="confirmation" [(ngModel)]="patient.confirmation">
+                        <mat-option value="SIN_CONFIRMAR">
+                            Sin Confirmar
+                        </mat-option>
                         <mat-option value="CONFIRMADO_SINTOMATICO">
                             Confirmado sintomático
                         </mat-option>
@@ -174,7 +177,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col s6">
+            <!-- <div class="col s6">
                 <label id="example-radio-group-label" >Control</label>
                 <br>
                 <mat-radio-group aria-label="SELECCIONE UNA OPCIÓN" [(ngModel)]="patient.control" name="control">
@@ -182,7 +185,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <mat-radio-button color="primary" value="NO">NO</mat-radio-button>
                 </mat-radio-group>
-            </div>
+            </div> -->
 
         </div>
         <br>

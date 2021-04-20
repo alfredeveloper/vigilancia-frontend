@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Follow } from 'src/app/models/follow';
 import { FollowService } from 'src/app/services/follow.service';
+import { TypeDocumentService } from 'src/app/services/type-document.service';
 import { FollowAddComponent } from '../follow-add/follow-add.component';
 import { FollowEditComponent } from '../follow-edit/follow-edit.component';
 
@@ -20,17 +21,23 @@ export class FollowsComponent implements OnInit {
 
   follow: Follow;
 
-  displayedColumns: string[] = ['temperatura', 'escalofrios', 'tos', 'dolor_garganta', 'dolor_pecho', 'date', 'accion'];
+  displayedColumns: string[] = [];
   dataSource: MatTableDataSource<any>;
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  tipos = [];
+  tipo = "";
+  documento = "";
+  nombres = "";
+  apellidos = "";
 
   constructor(
     public dialogRef: MatDialogRef<FollowsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _followService: FollowService,
+    private _typeService: TypeDocumentService,
     private _bottomSheet: MatBottomSheet
   ) { 
     this.follow = new Follow(null, false, '', false,  false, '', false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, '', false, false, false, false, false, false, false, '', '', '', '', '', '', '', '', '', new Date(),'', null);
@@ -38,6 +45,7 @@ export class FollowsComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerSeguimientos();
+    this.obtenerTiposDeDocumento();
     console.log('DATA E', this.data)
   }
 
@@ -45,12 +53,30 @@ export class FollowsComponent implements OnInit {
     this._followService.getFollowsByPatient(this.data._id).subscribe(
       response => {
         console.log('RESPONSE FOLLOW BY PATIENT', response)
-        this.dataSource = new MatTableDataSource(response.data);
+        this.dataSource = new MatTableDataSource(response.data2);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        this.displayedColumns = response.headers;
+
+        this.tipo = response.patient.type_document;
+        this.documento = response.patient.document;
+        this.nombres = response.patient.name;
+        this.apellidos = `${response.patient.apaterno} ${response.patient.amaterno}`;
       },
       error => {
         console.log('ERROR FOLLOW BY PATIENT', error)
+      }
+    )
+  }
+
+  obtenerTiposDeDocumento() {
+    this._typeService.getTiposDeDocumentos().subscribe(
+      response => {
+        this.tipos = response.data;
+      }, 
+      error => {
+        
       }
     )
   }
