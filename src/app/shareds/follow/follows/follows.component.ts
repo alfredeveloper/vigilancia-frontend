@@ -20,9 +20,15 @@ import { FollowEditComponent } from '../follow-edit/follow-edit.component';
 export class FollowsComponent implements OnInit {
 
   follow: Follow;
+  isVertically = false;
 
   displayedColumns: string[] = [];
+  columnasFijas: any[] = [];
+
   dataSource: MatTableDataSource<any>;
+
+  displayedColumnsVer: string[] = ['pa','fc','fr','temperatura','pulsioximetria','tos','dolor_garganta','congestion_nasal','fiebre','malestar_general','dificultad_respiratoria','diarrea','nausea','cefalea','irritabilidad','dolor_muscular','dolor_abdominal','dolor_pecho','dolor_articulaciones','disnea','taquipnea','saturacion_oxigeno','alteracion_conciencia','fosfato_cloriquina','hidorxicloroquina','azitrocina','antibiotico','antiviral','especificar_medicamento','estado','action'];
+  dataSourceVer: MatTableDataSource<any>;
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -49,15 +55,34 @@ export class FollowsComponent implements OnInit {
     console.log('DATA E', this.data)
   }
 
+  seleccionarColumna(index) {
+
+    if(index > 0) {
+      this.editarSeguimiento(this.columnasFijas[index]);
+    }
+    console.log('columna', this.columnasFijas[index])
+
+  }
+
   obtenerSeguimientos() {
     this._followService.getFollowsByPatient(this.data._id).subscribe(
       response => {
         console.log('RESPONSE FOLLOW BY PATIENT', response)
+
         this.dataSource = new MatTableDataSource(response.data2);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
-        this.displayedColumns = response.headers;
+        this.dataSourceVer = new MatTableDataSource(response.data);
+
+        this.columnasFijas = response.headers;
+        this.displayedColumns = [];
+        for (let index = 0; index < response.headers.length; index++) {
+          const element = response.headers[index];
+          
+          
+          this.displayedColumns.push(element.created_at);
+        }
 
         this.tipo = response.patient.type_document;
         this.documento = response.patient.document;

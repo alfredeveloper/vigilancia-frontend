@@ -34,6 +34,14 @@
     <div class="row">
 
         <div style="float: right; margin-top: 13px;">
+            <button (click)="isVertically = !isVertically" type="button" mat-mini-fab [color]="(isVertically)?'primary': ''" aria-label="Ver verticalmente">
+                <mat-icon>view_column</mat-icon>
+            </button>
+            &nbsp;
+            <button (click)="isVertically = !isVertically" type="button" mat-mini-fab [color]="(!isVertically)?'primary': ''" aria-label="Ver horizontalmente">
+                <mat-icon>calendar_view_day</mat-icon>
+            </button>
+            &nbsp;
             <button type="button" (click)="agregarSeguimiento()" mat-stroked-button color="primary">AGREGAR SEGUIMIENTO</button>
         </div>
         
@@ -53,33 +61,182 @@
             </div>
         </div>
 
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z4 overflow-x">
+        <div class="horizontally" *ngIf="!isVertically">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z4 overflow-x">
+                
+                <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; let i = index">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="seleccionarColumna(i)"> {{(i == 0)? column : column | date: 'dd/MM/yyyy, h:mm a' }} </th>
+                    <td mat-cell *matCellDef="let element"> {{(element[i] && i != 0)? 'X': element[i]}} </td>
+                </ng-container>
+                
+                <!-- <ng-container matColumnDef="accion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10px;"> Accion </th>
+                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
+                        <button mat-mini-fab color="primary" (click)="editarSeguimiento(row)" aria-label="Example icon button with a delete icon">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        
+                    </td>
+                </ng-container> -->
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="6">No se encontraron registros</td>
+                </tr>
+            </table>
             
-            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns; let i = index">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{(i == 0)? column : column | date: 'dd/MM/yyyy, h:mm a' }} </th>
-                <td mat-cell *matCellDef="let element"> {{element[i]}} </td>
-            </ng-container>
-            
-            <!-- <ng-container matColumnDef="accion">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10px;"> Accion </th>
-                <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
-                    <button mat-mini-fab color="primary" (click)="editarSeguimiento(row)" aria-label="Example icon button with a delete icon">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    
-                </td>
-            </ng-container> -->
-            
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            
-            <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="6">No se encontraron registros</td>
-            </tr>
-        </table>
+            <mat-paginator [pageSize]="40" [pageSizeOptions]="[40]" class="mat-elevation-z4"></mat-paginator>
+        </div>
+        <br>
+        <div class="vertically" *ngIf="isVertically">
+            <table mat-table [dataSource]="dataSourceVer" matSort class="mat-elevation-z1">
 
-        <mat-paginator [pageSize]="40" [pageSizeOptions]="[40]" class="mat-elevation-z4"></mat-paginator>
-    
+                <ng-container matColumnDef="pa">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PA </th>
+                    <td mat-cell *matCellDef="let row"> 
+                        {{row.pa}}
+                    </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="fc">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FC </th>
+                    <td mat-cell *matCellDef="let row"> 
+                        {{row.fc}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fr">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FR </th>
+                    <td mat-cell *matCellDef="let row"> {{row.fr}}</td>
+                </ng-container>
+                <ng-container matColumnDef="temperatura">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Temperatura </th>
+                    <td mat-cell *matCellDef="let row"> {{row.temperatura}}</td>
+                </ng-container>
+                <ng-container matColumnDef="pulsioximetria">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Pulsioximetria </th>
+                    <td mat-cell *matCellDef="let row"> {{row.pulsioximetria}}</td>
+                </ng-container>
+                <ng-container matColumnDef="tos">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tos </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.tos)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="dolor_garganta">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor de garganta </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.dolor_garganta)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="congestion_nasal">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Congestion Nasal </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.congestion_nasal)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="fiebre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fiebre </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.fiebre)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="malestar_general">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Malestar general </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.malestar_general)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="dificultad_respiratoria">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dificultad respiratoria </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.dificultad_respiratoria)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="diarrea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Diarrea </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.diarrea)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="nausea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nausea </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.nausea_vomito)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="cefalea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cefalea </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.cefalea)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="irritabilidad">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Irritabilidad </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.irritabilidad_confusion)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="dolor_muscular">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor muscular </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.dolor_muscular)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="dolor_abdominal">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor abdominal </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.dolor_abdominal)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="dolor_pecho">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor de pecho </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.dolor_pecho)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="dolor_articulaciones">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dolor de articulaciones </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.dolor_articulaciones)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="disnea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Disnea </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.disnea)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="taquipnea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Taquipnea </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.taquipnea)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="saturacion_oxigeno">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Saturación de oxígeno </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.saturacion_oxigeno)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="alteracion_conciencia">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Alteración de conciencia </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.alteracion_conciencia)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="fosfato_cloriquina">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fosfato de cloriquina </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.fosfato_cloroquina)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="hidorxicloroquina">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Hidorxicloroquina </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.hidorxicloroquina)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="azitrocina">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Hidorxicloroquina + Azitrocina </th>
+                    <td mat-cell *matCellDef="let row"> {{(row.azitromicina)?'SI': 'NO'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="antibiotico">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Antibiótico </th>
+                    <td mat-cell *matCellDef="let row"> {{row.antibiotico}}</td>
+                </ng-container>
+                <ng-container matColumnDef="antiviral">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Antiviral </th>
+                    <td mat-cell *matCellDef="let row"> {{row.antiviral}}</td>
+                </ng-container>
+                <ng-container matColumnDef="especificar_medicamento">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Especificar medicamento </th>
+                    <td mat-cell *matCellDef="let row"> {{row.especificar_medicamento}}</td>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                    <td mat-cell *matCellDef="let row"> {{row.estado_evolucion}}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 10px;"> Accion </th>
+                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> 
+                        <button mat-mini-fab color="primary" (click)="editarSeguimiento(row)" aria-label="Example icon button with a delete icon">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsVer"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsVer;"></tr>
+                
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="6">No se encontraron registros</td>
+                </tr>
+            </table>
+        </div>
+
+
     </div>
 </div>
 
