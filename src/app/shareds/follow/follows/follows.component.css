@@ -9,3 +9,7 @@ table {
 .overflow-x {
     overflow-x: auto;
 }
+
+td {
+    padding: 0px;
+}

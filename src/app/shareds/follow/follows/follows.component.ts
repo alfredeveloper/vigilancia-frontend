@@ -27,7 +27,7 @@ export class FollowsComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
 
-  displayedColumnsVer: string[] = ['pa','fc','fr','temperatura','pulsioximetria','tos','dolor_garganta','congestion_nasal','fiebre','malestar_general','dificultad_respiratoria','diarrea','nausea','cefalea','irritabilidad','dolor_muscular','dolor_abdominal','dolor_pecho','dolor_articulaciones','disnea','taquipnea','saturacion_oxigeno','alteracion_conciencia','fosfato_cloriquina','hidorxicloroquina','azitrocina','antibiotico','antiviral','especificar_medicamento','estado','action'];
+  displayedColumnsVer: string[] = ['fecha', 'pa','fc','fr','temperatura','pulsioximetria','tos','dolor_garganta','congestion_nasal','fiebre','malestar_general','dificultad_respiratoria','diarrea','nausea','cefalea','irritabilidad','dolor_muscular','dolor_abdominal','dolor_pecho','dolor_articulaciones','disnea','taquipnea','saturacion_oxigeno','alteracion_conciencia','fosfato_cloriquina','hidorxicloroquina','azitrocina','antibiotico','antiviral','especificar_medicamento','estado','action'];
   dataSourceVer: MatTableDataSource<any>;
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
